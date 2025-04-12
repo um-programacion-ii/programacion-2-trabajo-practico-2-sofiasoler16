@@ -59,6 +59,6 @@ body:
       options:
         - label: La tarea está implementada correctamente.
         - label: La funcionalidad fue probada desde Consola o Main.
-        - label: Se creó una rama específica para esta tarea.
+        - label: Se subio esta tarea a la rama de su etapa
         - label: Se abrió un Pull Request que menciona este Issue.
 
