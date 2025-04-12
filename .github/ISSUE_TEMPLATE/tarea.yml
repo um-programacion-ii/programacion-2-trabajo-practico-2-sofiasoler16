@@ -18,7 +18,7 @@ body:
     attributes:
       label: Objetivo
       description: ¿Qué se busca lograr con esta tarea?
-l
+
       placeholder: Crear clase Usuario con atributos básicos
     validations:
       required: true
