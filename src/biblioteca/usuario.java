@@ -3,11 +3,13 @@ package biblioteca;
 public class usuario {
     private String nombre;
     private String apellido;
+    private int id;
     private String mail;
 
-    public usuario(String nombre, String apellido, String mail) {
+    public usuario(String nombre, String apellido, int id, String mail) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.id = id;
         this.mail = mail;
     }
 
@@ -23,6 +25,10 @@ public class usuario {
     }
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getMail() {
