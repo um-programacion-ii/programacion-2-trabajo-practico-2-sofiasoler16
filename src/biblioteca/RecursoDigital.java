@@ -1,6 +1,6 @@
 package biblioteca;
 
-public interface recursoDigital {
+public interface RecursoDigital {
     int getId();
     String getTitulo();
 }

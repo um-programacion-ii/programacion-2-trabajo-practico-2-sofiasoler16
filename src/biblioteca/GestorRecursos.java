@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Con gestor recursos podemos recorrer los recursos en una lista y agregarlos a ella
-public class gestorRecursos {
-    private List<recursoDigitalBase> recursos;
+public class GestorRecursos {
+    private List<RecursoDigitalBase> recursos;
 
-    public gestorRecursos() {
+    public GestorRecursos() {
         recursos = new ArrayList<>();
     }
 
-    public void agregarRecurso(recursoDigitalBase recurso) {
+    public void agregarRecurso(RecursoDigitalBase recurso) {
         recursos.add(recurso);
     }
 
-    public List<recursoDigitalBase> getRecursos() {
+    public List<RecursoDigitalBase> getRecursos() {
         return recursos;
     }
 }

@@ -1,11 +1,11 @@
 package biblioteca;
 
 import java.util.Scanner;
-//uso scanner para leer datos que ingresa el usuario
-public class consola {
+//uso scanner para leer datos que ingresa el Usuario
+public class Consola {
     private Scanner scanner;
 
-    public consola() {
+    public Consola() {
         scanner = new Scanner(System.in);
     }
 

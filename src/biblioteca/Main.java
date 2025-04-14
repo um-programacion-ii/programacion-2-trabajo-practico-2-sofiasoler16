@@ -1,4 +1,4 @@
 package biblioteca;
 
-public class main {
+public class Main {
 }

@@ -1,9 +1,9 @@
 package biblioteca;
 
-public class revista extends recursoDigitalBase{
+public class Revista extends RecursoDigitalBase {
     private int numeroEdicion;
 
-    public revista(String titulo, int id, int numeroEdicion) {
+    public Revista(String titulo, int id, int numeroEdicion) {
         super(titulo, id);
         this.numeroEdicion = numeroEdicion;
     }
