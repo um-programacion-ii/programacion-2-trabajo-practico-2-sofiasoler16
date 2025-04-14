@@ -1,10 +1,10 @@
 package biblioteca;
 
-public abstract class recursoDigitalBase {
+public abstract class RecursoDigitalBase {
     private String titulo;
     private int id;
 
-    public recursoDigitalBase(String titulo, int id) {
+    public RecursoDigitalBase(String titulo, int id) {
         this.titulo = titulo;
         this.id = id;
     }

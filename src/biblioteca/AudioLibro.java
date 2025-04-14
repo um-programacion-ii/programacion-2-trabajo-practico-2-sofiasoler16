@@ -1,9 +1,9 @@
 package biblioteca;
 
-public class audioLibro extends recursoDigitalBase{
+public class AudioLibro extends RecursoDigitalBase {
     private String tiempo;
 
-    public audioLibro(String titulo, int id, String tiempo) {
+    public AudioLibro(String titulo, int id, String tiempo) {
         super(titulo, id);
         this.tiempo = tiempo;
     }

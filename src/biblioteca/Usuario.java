@@ -1,12 +1,12 @@
 package biblioteca;
 
-public class usuario {
+public class Usuario {
     private String nombre;
     private String apellido;
     private int id;
     private String mail;
 
-    public usuario(String nombre, String apellido, int id, String mail) {
+    public Usuario(String nombre, String apellido, int id, String mail) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = id;
