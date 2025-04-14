@@ -19,5 +19,5 @@ public class gestorUsuarios {
     public List<usuario> getUsuarios() {
         return usuarios;
     }
-    
+
 }
