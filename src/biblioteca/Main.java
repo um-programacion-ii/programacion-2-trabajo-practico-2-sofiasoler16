@@ -21,7 +21,8 @@ public class Main {
             Libro libro = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025);
 
             System.out.println("Libro creado:");
-            System.out.println(libro);
+            //Compruebo que sirva mostrarinformacion() de clase base
+            libro.mostrarInformacion();
         } else {
             System.out.println("Opción no implementada todavía.");
         }

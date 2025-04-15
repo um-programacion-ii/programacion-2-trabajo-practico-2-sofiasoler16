@@ -20,4 +20,15 @@ public abstract class RecursoDigitalBase {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Título: " + titulo + " | ID: " + id;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println(this.toString());
+    }
+
+
+
 }
