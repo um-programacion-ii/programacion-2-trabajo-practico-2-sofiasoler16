@@ -3,8 +3,8 @@ package biblioteca;
 public class AudioLibro extends RecursoDigitalBase implements Prestable {
     private String tiempo;
 
-    public AudioLibro(String titulo, int id, String tiempo) {
-        super(titulo, id);
+    public AudioLibro(String titulo, int id, String tiempo, ServicioNotificaciones servicioNotificaciones) {
+        super(titulo, id, servicioNotificaciones);
         this.tiempo = tiempo;
     }
 
@@ -30,11 +30,13 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
     @Override
     public void prestar() {
         System.out.println("AudioLibro prestado.");
+        servicioNotificaciones.enviarNotificaciones("Se presto el AudioLibro: " + getTitulo());
     }
 
     @Override
     public void devolver() {
         System.out.println("AudioLibro devuelto.");
+        servicioNotificaciones.enviarNotificaciones("Se devolvio el AudioLibro: " + getTitulo());
     }
 
 }

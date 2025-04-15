@@ -3,8 +3,8 @@ package biblioteca;
 public class Podcast extends RecursoDigitalBase implements Prestable{
     private String canal;
 
-    public Podcast(String titulo, int id, String canal) {
-        super(titulo, id);
+    public Podcast(String titulo, int id, String canal, ServicioNotificaciones servicioNotificaciones) {
+        super(titulo, id, servicioNotificaciones);
         this.canal = canal;
     }
 
@@ -30,11 +30,13 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
     @Override
     public void prestar() {
         System.out.println("Podcast prestado.");
+        servicioNotificaciones.enviarNotificaciones("Se presto el podcast: " + getTitulo());
     }
 
     @Override
     public void devolver() {
         System.out.println("Podcast devuelto.");
+        servicioNotificaciones.enviarNotificaciones("Se devolvio el podcast: " + getTitulo());
     }
 
 }
