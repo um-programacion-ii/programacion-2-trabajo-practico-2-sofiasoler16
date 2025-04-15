@@ -1,6 +1,6 @@
 package biblioteca;
 
-public abstract class RecursoDigitalBase {
+public abstract class RecursoDigitalBase implements RecursoDigital{
     private String titulo;
     private int id;
     protected ServicioNotificaciones servicioNotificaciones;
@@ -28,9 +28,16 @@ public abstract class RecursoDigitalBase {
         return "Título: " + titulo + " | ID: " + id;
     }
 
+    @Override
+    public String getIdentificador() {
+        return titulo;
+    }
+
+
     public void mostrarInformacion() {
         System.out.println(this.toString());
     }
+
 
 
 
