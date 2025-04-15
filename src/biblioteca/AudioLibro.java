@@ -16,4 +16,10 @@ public class AudioLibro extends RecursoDigitalBase {
     public String toString() {
         return super.toString() + " | Tiempo: " + tiempo;
     }
+
+    @Override
+    public void mostrarInformacion() {
+        System.out.println(this.toString());
+    }
+
 }

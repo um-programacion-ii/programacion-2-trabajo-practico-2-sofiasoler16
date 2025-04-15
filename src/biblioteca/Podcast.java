@@ -16,4 +16,10 @@ public class Podcast extends RecursoDigitalBase {
     public String toString() {
         return super.toString() + " | Canal: " + canal;
     }
+
+    @Override
+    public void mostrarInformacion() {
+        System.out.println(this.toString());
+    }
+
 }
