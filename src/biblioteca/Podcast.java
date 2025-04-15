@@ -1,6 +1,6 @@
 package biblioteca;
 
-public class Podcast extends RecursoDigitalBase {
+public class Podcast extends RecursoDigitalBase implements Prestable{
     private String canal;
 
     public Podcast(String titulo, int id, String canal) {
@@ -20,6 +20,21 @@ public class Podcast extends RecursoDigitalBase {
     @Override
     public void mostrarInformacion() {
         System.out.println(this.toString());
+    }
+
+    @Override
+    public boolean estaDisponible() {
+        return true;
+    }
+
+    @Override
+    public void prestar() {
+        System.out.println("Podcast prestado.");
+    }
+
+    @Override
+    public void devolver() {
+        System.out.println("Podcast devuelto.");
     }
 
 }

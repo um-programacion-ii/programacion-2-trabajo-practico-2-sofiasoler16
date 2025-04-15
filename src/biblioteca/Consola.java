@@ -22,4 +22,24 @@ public class Consola {
         System.out.print("Ingrese una opción: ");
         return scanner.nextInt();
     }
+
+    public void mostrarMenuRecurso(RecursoDigitalBase recurso) {
+        String tipo = recurso.getClass().getSimpleName();
+
+        System.out.println("=== Menú del recurso seleccionado ===");
+        System.out.println("1. Mostrar información " + tipo.toUpperCase());
+
+        if (recurso instanceof Prestable) {
+            System.out.println("2. Prestar " + tipo.toUpperCase());
+            System.out.println("3. Devolver " + tipo.toUpperCase());
+        }
+
+        if (recurso instanceof Renovable) {
+            System.out.println("4. Renovar " + tipo.toUpperCase());
+        }
+
+        System.out.println("0. Volver al menú principal");
+    }
+
+
 }
