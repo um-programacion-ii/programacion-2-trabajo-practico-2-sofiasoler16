@@ -11,4 +11,10 @@ public class Revista extends RecursoDigitalBase {
     public int getNumeroEdicion() {
         return numeroEdicion;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Nº edición: " + numeroEdicion;
+    }
+
 }
