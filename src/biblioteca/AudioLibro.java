@@ -24,7 +24,7 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
 
     @Override
     public boolean estaDisponible() {
-        return true; 
+        return true;
     }
 
     @Override
