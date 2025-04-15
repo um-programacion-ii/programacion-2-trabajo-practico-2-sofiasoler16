@@ -1,5 +1,5 @@
 package biblioteca;
 
 public interface ServicioNotificaciones {
-    void enviarNotificaciones(String manesaje);
+    void enviarNotificaciones(String mensaje);
 }
