@@ -6,5 +6,24 @@ public class Main {
 
         System.out.println("Título: " + podcast.getTitulo());
         System.out.println("Canal: " + podcast.getCanal());
+
+
+        Consola consola = new Consola();
+
+        consola.mostrarMenu();
+
+        int opcion = 2;
+
+        if (opcion == 2) {
+
+            System.out.println("Se eligio la opcion: 2.Crear libro");
+
+            Libro libro = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025);
+
+            System.out.println("Libro creado:");
+            System.out.println(libro);
+        } else {
+            System.out.println("Opción no implementada todavía.");
+        }
     }
 }
