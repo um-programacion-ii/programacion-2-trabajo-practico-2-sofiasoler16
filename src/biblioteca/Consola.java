@@ -23,6 +23,15 @@ public class Consola {
         return scanner.nextInt();
     }
 
+    public void mostrarMenuGestionRecursos() {
+        System.out.println("=== Gestión de Recursos ===");
+        System.out.println("1. Agregar recurso");
+        System.out.println("2. Buscar recurso por título");
+        System.out.println("3. Mostrar todos los recursos");
+        System.out.println("0. Volver al menú principal");
+    }
+
+
     public void mostrarMenuRecurso(RecursoDigitalBase recurso) {
         String tipo = recurso.getClass().getSimpleName();
 
