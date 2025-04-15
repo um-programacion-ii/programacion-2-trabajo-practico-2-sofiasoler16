@@ -30,16 +30,19 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
     @Override
     public void prestar() {
         System.out.println("Revista prestado.");
+        servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo());
     }
 
     @Override
     public void devolver() {
         System.out.println("Revista devuelto.");
+        servicioNotificaciones.enviarNotificaciones("Se devolvio la revista: " + getTitulo());
     }
 
     @Override
     public void renovar() {
         System.out.println("Revista renovado.");
+        servicioNotificaciones.enviarNotificaciones(("Se renovo la revista: " + getTitulo()));
     }
 
 }

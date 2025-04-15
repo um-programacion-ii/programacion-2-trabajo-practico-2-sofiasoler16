@@ -18,6 +18,8 @@ public class Main {
 
             Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, mail);
 
+            libro1.prestar();
+            
             System.out.println("Libro creado:");
             //Compruebo que sirva mostrarinformacion() de clase base
             libro1.mostrarInformacion();

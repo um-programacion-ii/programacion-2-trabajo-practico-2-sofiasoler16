@@ -42,16 +42,19 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     @Override
     public void prestar() {
         System.out.println("Libro prestado.");
+        servicioNotificaciones.enviarNotificaciones("Se presto el libro:" + getTitulo());
     }
 
     @Override
     public void devolver() {
         System.out.println("Libro devuelto.");
+        servicioNotificaciones.enviarNotificaciones("Se devolvio el libro:" + getTitulo());
     }
 
     @Override
     public void renovar() {
         System.out.println("Libro renovado.");
+        servicioNotificaciones.enviarNotificaciones("Se renovo el libro:" + getTitulo());
     }
 
 }
