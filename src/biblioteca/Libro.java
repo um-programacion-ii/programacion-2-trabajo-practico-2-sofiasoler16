@@ -35,4 +35,10 @@ public class Libro extends RecursoDigitalBase {
                 '}';
     }
 
+    @Override
+    public void mostrarInformacion() {
+        System.out.println(this.toString());
+    }
+
+
 }
