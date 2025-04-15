@@ -1,6 +1,6 @@
 package biblioteca;
 
-public class AudioLibro extends RecursoDigitalBase {
+public class AudioLibro extends RecursoDigitalBase implements Prestable {
     private String tiempo;
 
     public AudioLibro(String titulo, int id, String tiempo) {
@@ -20,6 +20,21 @@ public class AudioLibro extends RecursoDigitalBase {
     @Override
     public void mostrarInformacion() {
         System.out.println(this.toString());
+    }
+
+    @Override
+    public boolean estaDisponible() {
+        return true; 
+    }
+
+    @Override
+    public void prestar() {
+        System.out.println("AudioLibro prestado.");
+    }
+
+    @Override
+    public void devolver() {
+        System.out.println("AudioLibro devuelto.");
     }
 
 }
