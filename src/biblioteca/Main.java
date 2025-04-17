@@ -17,9 +17,6 @@ public class Main {
         Categoria interes = Categoria.INTERES;
         Categoria ficcion = Categoria.FICCION;
 
-
-
-
         consola.mostrarMenu();
 
         int opcion = 2;
@@ -95,6 +92,14 @@ public class Main {
         for (RecursoDigital r : filtroCategoria) {
             r.mostrarInformacion();
         }
+
+
+        //Recursos ordenados por titulo
+        System.out.println("===Ordenados por titulo===");
+        List<RecursoDigital> ordenados = ServicioOrdenamiento.ordenarPorTitulo(gestorBiblioteca.getRecursos());
+        ordenados.forEach(RecursoDigital::mostrarInformacion);
+
+
     }
 
 }
