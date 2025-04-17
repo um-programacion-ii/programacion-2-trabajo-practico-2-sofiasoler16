@@ -100,7 +100,9 @@ public class Main {
 
         consola.buscarUsuarioPorId(gestorBiblioteca);
 
-        consola.prestarRecursos(libro2);
+        ((Prestable) podcast).prestar(); // presto el podcast
+
+        consola.prestarRecursos(podcast);
 
     }
 

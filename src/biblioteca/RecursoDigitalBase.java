@@ -5,6 +5,7 @@ public abstract class RecursoDigitalBase implements RecursoDigital{
     private int id;
     protected ServicioNotificaciones servicioNotificaciones;
     private CategoriaRecurso categoriaRecurso;
+    private EstadoRecurso estado = EstadoRecurso.DISPONIBLE;
 
     public RecursoDigitalBase(String titulo, int id, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
         this.titulo = titulo;
@@ -34,6 +35,15 @@ public abstract class RecursoDigitalBase implements RecursoDigital{
         return titulo;
     }
 
+    @Override
+    public EstadoRecurso getEstado() {
+        return estado;
+    }
+
+    @Override
+    public void actualizarEstado(EstadoRecurso nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
 
     public void mostrarInformacion() {
         System.out.println(this.toString());

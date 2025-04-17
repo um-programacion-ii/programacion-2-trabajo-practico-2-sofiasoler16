@@ -24,7 +24,7 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
 
     @Override
     public boolean estaDisponible() {
-        return true;
+        return getEstado() == EstadoRecurso.DISPONIBLE;
     }
 
     @Override
@@ -32,6 +32,7 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
         if (!estaDisponible()) {
             throw new RecursoNoDisponibleException("No se puede prestar el PODCAST " + getTitulo() + " No disponible");
         }
+        actualizarEstado(EstadoRecurso.PRESTADO);
 
         System.out.println("Podcast prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto el podcast: " + getTitulo());
@@ -39,6 +40,7 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
 
     @Override
     public void devolver() {
+        actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Podcast devuelto.");
         servicioNotificaciones.enviarNotificaciones("Se devolvio el podcast: " + getTitulo());
     }
