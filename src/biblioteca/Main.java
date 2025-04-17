@@ -1,5 +1,7 @@
 package biblioteca;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -65,5 +67,10 @@ public class Main {
         encontradoRev.mostrarInformacion();
 
 
+        List<RecursoDigital> resultados = gestorBiblioteca.buscarPorTitulo("java");
+        System.out.println("=== Resultados de búsqueda por título ===");
+        for (RecursoDigital recurso : resultados) {
+            recurso.mostrarInformacion();
+        }
     }
 }
