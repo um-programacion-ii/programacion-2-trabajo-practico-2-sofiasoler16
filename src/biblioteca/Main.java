@@ -96,6 +96,8 @@ public class Main {
 
         consola.mostrarMenuOrdenamiento(gestorBiblioteca);
 
+        consola.buscarUsuarioPorId(gestorBiblioteca);
+
     }
 
 }
