@@ -52,4 +52,12 @@ public class GestorBiblioteca {
     public Map<String, Usuario> getUsuarios() {
         return usuarios;
     }
+
+    //Devuelve el recurso filtrado por categoria
+    public List<RecursoDigital> filtrarPorCategoria(Categoria categoria) {
+        return recursos.stream()
+                .filter(r -> r.getCategoria().equals(categoria))
+                .toList();
+    }
+
 }
