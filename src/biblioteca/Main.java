@@ -85,6 +85,7 @@ public class Main {
             recurso.mostrarInformacion();
         }
 
+        consola.mostrarCategoriasDisponibles();
 
         List<RecursoDigital> filtroCategoria = gestorBiblioteca.filtrarPorCategoria(ficcion);
 
