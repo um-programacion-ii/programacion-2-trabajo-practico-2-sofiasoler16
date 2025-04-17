@@ -56,7 +56,7 @@ public class GestorBiblioteca {
     //Devuelve el recurso filtrado por categoria
     public List<RecursoDigital> filtrarPorCategoria(Categoria categoria) {
         return recursos.stream()
-                .filter(r -> r.getCategoria().equals(categoria))
+                .filter(r -> r.getCategoria() == categoria)
                 .toList();
     }
 
