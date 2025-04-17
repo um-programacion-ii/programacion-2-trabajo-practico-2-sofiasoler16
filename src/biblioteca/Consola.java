@@ -1,6 +1,7 @@
 package biblioteca;
 
 import java.util.Scanner;
+import java.util.List;
 //uso scanner para leer datos que ingresa el Usuario
 public class Consola {
     private Scanner scanner;
@@ -50,5 +51,25 @@ public class Consola {
         System.out.println("0. Volver al menú principal");
     }
 
+    public void mostrarMenuOrdenamiento(GestorBiblioteca biblioteca) {
+        System.out.println("=== Búsqueda y Ordenamiento ===");
+        System.out.println("1. Buscar por título");
+        System.out.println("0. salir");
+
+        int opcion = pedirOpcion();
+
+        switch (opcion) {
+            case 1:
+                System.out.print("Ingrese título: ");
+                String titulo = scanner.nextLine();
+                List<RecursoDigital> encontrados = biblioteca.buscarPorTitulo(titulo);
+                encontrados.forEach(RecursoDigital::mostrarInformacion);
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Opción inválida");
+        }
+    }
 
 }

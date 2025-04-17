@@ -1,5 +1,7 @@
 package biblioteca;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -7,6 +9,13 @@ public class Main {
 
         ServicioNotificaciones mail = new ServicioNotificacionesMail();
         ServicioNotificaciones sms = new ServicioNotificacionesSMS();
+        Categoria tecnologia = Categoria.TECNOLOGIA;
+        Categoria novela = Categoria.NOVELA;
+        Categoria historia = Categoria.HISTORIA;
+        Categoria romance = Categoria.ROMANCE;
+        Categoria ciencia = Categoria.CIENCIA;
+        Categoria interes = Categoria.INTERES;
+        Categoria ficcion = Categoria.FICCION;
 
         consola.mostrarMenu();
 
@@ -16,7 +25,7 @@ public class Main {
 
             System.out.println("Se eligio la opcion: 2.Crear libro");
 
-            Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, mail);
+            Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, mail, Categoria.ROMANCE);
 
             libro1.prestar();
             
@@ -27,10 +36,10 @@ public class Main {
             System.out.println("Opción no implementada todavía.");
         }
 
-        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, sms);
-        RecursoDigitalBase revista = new Revista("Ciencia Hoy", 2, 34, sms);
-        RecursoDigitalBase audiolibro1 = new AudioLibro("Historias que Inspiran", 3, "2:45", sms);
-        RecursoDigitalBase podcast = new Podcast("Charlas Sofi", 4, "Canal Sofía", sms);
+        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, sms, Categoria.TECNOLOGIA);
+        RecursoDigitalBase revista = new Revista("Ciencia Hoy", 2, 34, sms, Categoria.CIENCIA);
+        RecursoDigitalBase audiolibro1 = new AudioLibro("Historias que Inspiran", 3, "2:45", sms, Categoria.HISTORIA);
+        RecursoDigitalBase podcast = new Podcast("Charlas Sofi", 4, "Canal Sofía", sms, Categoria.INTERES);
 
         System.out.println("=== Probar comportamiento consistente (LSP) ===");
         libro2.mostrarInformacion();
@@ -50,12 +59,17 @@ public class Main {
         Usuario usuario1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com");
         gestorBiblioteca.agregarUsuario(usuario1);
 
-        Libro libro3  = new Libro("El Principito", 101, "Editorial Salamandra", "Antoine", 1943, mail);
+        Libro libro3  = new Libro("El Principito", 101, "Editorial Salamandra", "Antoine", 1943, mail, Categoria.FICCION);
         gestorBiblioteca.agregarRecurso(libro2);
+        gestorBiblioteca.agregarRecurso(libro3);
         gestorBiblioteca.agregarRecurso(revista);
+        gestorBiblioteca.agregarRecurso(audiolibro1);
+        gestorBiblioteca.agregarRecurso(podcast);
+
 
         RecursoDigital encontrado = gestorBiblioteca.buscarRecursoPorTitulo("Java en Acción");
         RecursoDigital encontradoRev = gestorBiblioteca.buscarRecursoPorTitulo("Ciencia Hoy");
+
         //Le digo que muestre la informacion si lo encuentra (DEL LIBRO)
         if(encontrado != null){
             encontrado.mostrarInformacion();
@@ -65,5 +79,22 @@ public class Main {
         encontradoRev.mostrarInformacion();
 
 
+        List<RecursoDigital> resultados = gestorBiblioteca.buscarPorTitulo("java");
+        System.out.println("=== Resultados de búsqueda por título ===");
+        for (RecursoDigital recurso : resultados) {
+            recurso.mostrarInformacion();
+        }
+
+
+        List<RecursoDigital> filtroCategoria = gestorBiblioteca.filtrarPorCategoria(ficcion);
+
+        System.out.println("=== Recursos en categoría: " + ficcion + " ===");
+        for (RecursoDigital r : filtroCategoria) {
+            r.mostrarInformacion();
+        }
+
+        consola.mostrarMenuOrdenamiento(gestorBiblioteca);
+
     }
+
 }

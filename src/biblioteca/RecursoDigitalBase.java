@@ -4,12 +4,13 @@ public abstract class RecursoDigitalBase implements RecursoDigital{
     private String titulo;
     private int id;
     protected ServicioNotificaciones servicioNotificaciones;
+    private Categoria categoria;
 
-
-    public RecursoDigitalBase(String titulo, int id, ServicioNotificaciones servicioNotificaciones) {
+    public RecursoDigitalBase(String titulo, int id, ServicioNotificaciones servicioNotificaciones, Categoria categoria) {
         this.titulo = titulo;
         this.id = id;
         this.servicioNotificaciones = servicioNotificaciones;
+        this.categoria = categoria;
     }
 
     public String getTitulo() {
@@ -38,7 +39,8 @@ public abstract class RecursoDigitalBase implements RecursoDigital{
         System.out.println(this.toString());
     }
 
-
-
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
 }
