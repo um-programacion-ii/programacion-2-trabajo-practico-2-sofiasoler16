@@ -3,8 +3,8 @@ package biblioteca;
 public class AudioLibro extends RecursoDigitalBase implements Prestable {
     private String tiempo;
 
-    public AudioLibro(String titulo, int id, String tiempo, ServicioNotificaciones servicioNotificaciones, Categoria categoria) {
-        super(titulo, id, servicioNotificaciones, categoria);
+    public AudioLibro(String titulo, int id, String tiempo, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
+        super(titulo, id, servicioNotificaciones, categoriaRecurso);
         this.tiempo = tiempo;
     }
 

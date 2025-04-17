@@ -72,4 +72,11 @@ public class Consola {
         }
     }
 
+    public void mostrarCategoriasDisponibles() {
+        System.out.println("=== Categorias Disponibles ===");
+        for (CategoriaRecurso categoriaRecurso : CategoriaRecurso.values()) {
+            System.out.println(categoriaRecurso.toString());
+        }
+    }
+
 }

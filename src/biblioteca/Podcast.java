@@ -3,8 +3,8 @@ package biblioteca;
 public class Podcast extends RecursoDigitalBase implements Prestable{
     private String canal;
 
-    public Podcast(String titulo, int id, String canal, ServicioNotificaciones servicioNotificaciones, Categoria categoria) {
-        super(titulo, id, servicioNotificaciones, categoria);
+    public Podcast(String titulo, int id, String canal, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
+        super(titulo, id, servicioNotificaciones, categoriaRecurso);
         this.canal = canal;
     }
 
