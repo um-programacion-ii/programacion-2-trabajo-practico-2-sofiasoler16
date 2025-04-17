@@ -93,12 +93,7 @@ public class Main {
             r.mostrarInformacion();
         }
 
-
-        //Recursos ordenados por titulo
-        System.out.println("===Ordenados por titulo===");
-        List<RecursoDigital> ordenados = ServicioOrdenamiento.ordenarPorTitulo(gestorBiblioteca.getRecursos());
-        ordenados.forEach(RecursoDigital::mostrarInformacion);
-
+        consola.mostrarMenuOrdenamiento(gestorBiblioteca);
 
     }
 
