@@ -96,6 +96,14 @@ public class Main {
 
         consola.mostrarMenuOrdenamiento(gestorBiblioteca);
 
+        System.out.println("---Pruebas Buscar Usuarios (Con try-catch)---");
+
+        consola.buscarUsuarioPorId(gestorBiblioteca);
+
+        ((Prestable) podcast).prestar(); // presto el podcast
+
+        consola.prestarRecursos(podcast);
+
     }
 
 }

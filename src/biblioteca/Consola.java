@@ -79,4 +79,41 @@ public class Consola {
         }
     }
 
+    public void buscarUsuarioPorId(GestorBiblioteca gestor) {
+        while (true) {
+            System.out.print("Ingrese ID del usuario: ");
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("salir")) {
+                break;
+            }
+
+            try {
+                Usuario usuario = gestor.buscarUsuarioPorId(input);
+                System.out.println("✅ Usuario encontrado:");
+                System.out.println("Nombre: " + usuario.getNombre() + " " + usuario.getApellido());
+                System.out.println("Email: " + usuario.getMail());
+                break; // salimos del bucle si se encontró
+            } catch (UsuarioNoEncontradoException e) {
+                System.out.println("⚠️ " + e.getMessage());
+                System.out.println("Intente nuevamente o escriba 'salir'.");
+            }
+        }
+    }
+
+    public void prestarRecursos(RecursoDigitalBase recurso) {
+        System.out.println("=== Prestar recursos ===");
+        if (recurso instanceof Prestable) {
+            try {
+                ((Prestable) recurso).prestar();
+                System.out.println("Prestamo exitoso");
+            } catch (RecursoNoDisponibleException e) {
+                System.out.println( e.getMessage());
+            }
+        } else {
+            System.out.println("No se encontro el recurso");
+        }
+    }
+
+
 }

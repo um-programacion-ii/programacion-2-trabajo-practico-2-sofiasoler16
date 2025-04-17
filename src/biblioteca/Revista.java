@@ -24,17 +24,23 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
 
     @Override
     public boolean estaDisponible() {
-        return true;
+        return getEstado() == EstadoRecurso.DISPONIBLE;
     }
 
     @Override
     public void prestar() {
+        if (!estaDisponible()) {
+            throw new RecursoNoDisponibleException("No se puede prestar la REVISTA " + getTitulo() + " No disponible");
+        }
+        actualizarEstado(EstadoRecurso.PRESTADO);
+
         System.out.println("Revista prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo());
     }
 
     @Override
     public void devolver() {
+        actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Revista devuelto.");
         servicioNotificaciones.enviarNotificaciones("Se devolvio la revista: " + getTitulo());
     }
