@@ -29,6 +29,10 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
 
     @Override
     public void prestar() {
+        if (!estaDisponible()) {
+            throw new RecursoNoDisponibleException("No se puede prestar el PODCAST " + getTitulo() + " No disponible");
+        }
+
         System.out.println("Podcast prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto el podcast: " + getTitulo());
     }

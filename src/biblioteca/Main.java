@@ -96,7 +96,11 @@ public class Main {
 
         consola.mostrarMenuOrdenamiento(gestorBiblioteca);
 
+        System.out.println("---Pruebas Buscar Usuarios (Con try-catch)---");
+
         consola.buscarUsuarioPorId(gestorBiblioteca);
+
+        consola.prestarRecursos(libro2);
 
     }
 

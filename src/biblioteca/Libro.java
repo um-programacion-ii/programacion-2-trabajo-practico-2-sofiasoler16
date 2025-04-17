@@ -41,6 +41,10 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
 
     @Override
     public void prestar() {
+        if (!estaDisponible()) {
+            throw new UnsupportedOperationException("No se puede prestar el LIBRO " + getTitulo() + " No disponible");
+        }
+
         System.out.println("Libro prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto el libro: " + getTitulo());
     }

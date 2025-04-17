@@ -29,6 +29,10 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
 
     @Override
     public void prestar() {
+        if (!estaDisponible()) {
+            throw new RecursoNoDisponibleException("No se puede prestar el AUDIO LIBRO " + getTitulo() + " No disponible");
+        }
+
         System.out.println("AudioLibro prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto el AudioLibro: " + getTitulo());
     }

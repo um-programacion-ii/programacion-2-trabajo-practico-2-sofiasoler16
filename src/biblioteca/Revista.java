@@ -29,6 +29,10 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
 
     @Override
     public void prestar() {
+        if (!estaDisponible()) {
+            throw new RecursoNoDisponibleException("No se puede prestar la REVISTA " + getTitulo() + " No disponible");
+        }
+
         System.out.println("Revista prestado.");
         servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo());
     }

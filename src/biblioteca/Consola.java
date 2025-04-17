@@ -101,5 +101,19 @@ public class Consola {
         }
     }
 
+    public void prestarRecursos(RecursoDigitalBase recurso) {
+        System.out.println("=== Prestar recursos ===");
+        if (recurso instanceof Prestable) {
+            try {
+                ((Prestable) recurso).prestar();
+                System.out.println("Prestamo exitoso");
+            } catch (RecursoNoDisponibleException e) {
+                System.out.println( e.getMessage());
+            }
+        } else {
+            System.out.println("No se encontro el recurso");
+        }
+    }
+
 
 }
