@@ -19,4 +19,10 @@ public class ServicioReserva {
         }
     }
 
+    //Con esto manejo prioridad de reserva
+    public Reserva obtenerProximaReserva() {
+        return colaReservas.poll();
+    }
+
+
 }
