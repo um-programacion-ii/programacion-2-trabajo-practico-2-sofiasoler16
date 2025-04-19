@@ -36,7 +36,7 @@ public class Main {
             System.out.println("Opción no implementada todavía.");
         }
 
-        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, sms, CategoriaRecurso.TECNOLOGIA);
+        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, mail, CategoriaRecurso.TECNOLOGIA);
         RecursoDigitalBase revista = new Revista("Ciencia Hoy", 2, 34, sms, CategoriaRecurso.CIENCIA);
         RecursoDigitalBase audiolibro1 = new AudioLibro("Historias que Inspiran", 3, "2:45", sms, CategoriaRecurso.HISTORIA);
         RecursoDigitalBase podcast = new Podcast("Charlas Sofi", 4, "Canal Sofía", sms, CategoriaRecurso.INTERES);
@@ -103,6 +103,15 @@ public class Main {
         ((Prestable) podcast).prestar(); // presto el podcast
 
         consola.prestarRecursos(podcast);
+
+        System.out.println("---Pruebas servicioPrestamo---");
+
+        ServicioPrestamos servicioPrestamos = new ServicioPrestamos(gestorBiblioteca);
+        servicioPrestamos.prestar(libro2, usuario1);
+        servicioPrestamos.devolver(libro2);
+
+
+        consola.mostrarMenuPrestamos(gestorBiblioteca, servicioPrestamos);
 
     }
 
