@@ -24,5 +24,16 @@ public class ServicioReserva {
         return colaReservas.poll();
     }
 
+    public void mostrarReservas() {
+        System.out.println("=== Reservas Pendientes ===");
+        if (colaReservas.isEmpty()) {
+            System.out.println(" No hay reservas pendientes ");
+        } else {
+            for (Reserva r : colaReservas) {
+                System.out.println(r);
+            }
+        }
+    }
+
 
 }
