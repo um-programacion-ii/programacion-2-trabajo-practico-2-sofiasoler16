@@ -110,6 +110,9 @@ public class Main {
         servicioPrestamos.prestar(libro2, usuario1);
         servicioPrestamos.devolver(libro2);
 
+
+        consola.mostrarMenuPrestamos(gestorBiblioteca, servicioPrestamos);
+
     }
 
 }

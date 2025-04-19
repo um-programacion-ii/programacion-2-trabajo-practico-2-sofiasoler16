@@ -1,5 +1,7 @@
 package biblioteca;
 
+import java.util.List;
+
 public class ServicioPrestamos {
     private GestorBiblioteca gestor;
 
@@ -38,4 +40,19 @@ public class ServicioPrestamos {
 
         System.out.println("Devolucion exitosa");
     }
+
+    public void agregarPrestamo(String titulo, String idUsuario) {
+        List<RecursoDigital> encontrados = gestor.buscarPorTitulo(titulo);
+
+        if (encontrados.isEmpty()) {
+            throw new RecursoNoDisponibleException("Recurso no encontrado.");
+        }
+
+        RecursoDigital recurso = encontrados.get(0);
+
+        Usuario usuario = gestor.buscarUsuarioPorId(idUsuario);
+
+        prestar(recurso, usuario);
+    }
+
 }
