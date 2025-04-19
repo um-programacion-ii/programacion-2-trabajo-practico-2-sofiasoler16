@@ -28,6 +28,6 @@ public class Reserva {
     // lo que imprime cuando llamo al  objeto
     @Override
     public String toString() {
-        return "Reserva de " + recurso.getIdentificador() + "por " + fechaReserva
+        return "Reserva de " + recurso.getIdentificador() + "por " + fechaReserva;
     }
 }
