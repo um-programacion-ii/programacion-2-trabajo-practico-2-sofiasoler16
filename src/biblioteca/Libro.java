@@ -56,7 +56,7 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     }
 
     @Override
-    public void devolver(Usuario usuario) {
+    public synchronized void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Libro devuelto.");
 
@@ -68,7 +68,7 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     }
 
     @Override
-    public void renovar(Usuario usuario) {
+    public synchronized void renovar(Usuario usuario) {
         System.out.println("Libro renovado.");
 
         if (servicioNotificaciones instanceof ServicioNotificacionesMail) {

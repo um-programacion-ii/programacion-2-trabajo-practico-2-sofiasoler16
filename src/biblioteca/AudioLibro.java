@@ -44,7 +44,7 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
     }
 
     @Override
-    public void devolver(Usuario usuario) {
+    public synchronized void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("AudioLibro devuelto.");
 

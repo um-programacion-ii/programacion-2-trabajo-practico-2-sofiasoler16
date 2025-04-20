@@ -26,7 +26,7 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
     public synchronized boolean estaDisponible() {
         return getEstado() == EstadoRecurso.DISPONIBLE;
     }
-    
+
     @Override
     public synchronized void prestar(Usuario usuario) {
         if (!estaDisponible()) {
@@ -44,7 +44,7 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
     }
 
     @Override
-    public void devolver(Usuario usuario) {
+    public synchronized void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Revista devuelto.");
 
