@@ -40,28 +40,43 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     }
 
     @Override
-    public void prestar() {
+    public void prestar(Usuario usuario) {
         if (!estaDisponible()) {
             throw new RecursoNoDisponibleException("No se puede prestar el LIBRO " + getTitulo() + " No disponible");
         }
 
         actualizarEstado(EstadoRecurso.PRESTADO);
-
         System.out.println("Libro prestado.");
-        servicioNotificaciones.enviarNotificaciones("Se presto el libro: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se prestó el Libro: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se prestó el Libro: " + getTitulo(), usuario.getTelefono());
+        }
     }
 
     @Override
-    public void devolver() {
+    public void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Libro devuelto.");
-        servicioNotificaciones.enviarNotificaciones("Se devolvio el libro: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió el Libro: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió el Libro: " + getTitulo(), usuario.getTelefono());
+        }
     }
 
     @Override
-    public void renovar() {
+    public void renovar(Usuario usuario) {
         System.out.println("Libro renovado.");
-        servicioNotificaciones.enviarNotificaciones("Se renovo el libro: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se renovo el AudioLibro: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se renovo el AudioLibro: " + getTitulo(), usuario.getTelefono());
+        }
+
     }
 
 }

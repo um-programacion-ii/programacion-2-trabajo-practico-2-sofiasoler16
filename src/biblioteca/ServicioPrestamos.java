@@ -16,7 +16,7 @@ public class ServicioPrestamos {
                 return;
             }
 
-            ((Prestable) recurso).prestar(); // esto ya lanza excepción si está prestado
+            ((Prestable) recurso).prestar(usuario);
 
             recurso.actualizarEstado(EstadoRecurso.PRESTADO);
 
@@ -29,13 +29,13 @@ public class ServicioPrestamos {
         }
     }
 
-    public void devolver(RecursoDigital recurso) {
+    public void devolver(RecursoDigital recurso, Usuario usuario) {
         if (!(recurso instanceof Prestable)) {
             System.out.println("❌ Este recurso no se puede devolver.");
             return;
         }
 
-        ((Prestable) recurso).devolver();
+        ((Prestable) recurso).devolver(usuario);
         recurso.actualizarEstado(EstadoRecurso.DISPONIBLE);
 
         System.out.println("Devolucion exitosa");
@@ -82,7 +82,7 @@ public class ServicioPrestamos {
         }
 
         if (!encontrado) {
-            System.out.println("📭 Este usuario no tiene préstamos registrados.");
+            System.out.println("Este usuario no tiene préstamos registrados.");
         }
     }
 }

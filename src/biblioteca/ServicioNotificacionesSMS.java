@@ -7,8 +7,8 @@ public class ServicioNotificacionesSMS implements ServicioNotificaciones {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
-    public void enviarNotificaciones(String mensaje) {
-        NotificacionesSMS notificacion = new NotificacionesSMS(mensaje, "+549261000000"); // o número dinámico si querés
+    public void enviarNotificaciones(String mensaje, String destinatario) {
+        NotificacionesSMS notificacion = new NotificacionesSMS(mensaje, destinatario); // o número dinámico si querés
         executor.execute(notificacion::enviar);
     }
 

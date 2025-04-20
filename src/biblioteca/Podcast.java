@@ -28,21 +28,31 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
     }
 
     @Override
-    public void prestar() {
+    public void prestar(Usuario usuario) {
         if (!estaDisponible()) {
             throw new RecursoNoDisponibleException("No se puede prestar el PODCAST " + getTitulo() + " No disponible");
         }
         actualizarEstado(EstadoRecurso.PRESTADO);
-
         System.out.println("Podcast prestado.");
-        servicioNotificaciones.enviarNotificaciones("Se presto el podcast: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se prestó el Podcast: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se prestó el Podcast: " + getTitulo(), usuario.getTelefono());
+        }
+
     }
 
     @Override
-    public void devolver() {
+    public void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Podcast devuelto.");
-        servicioNotificaciones.enviarNotificaciones("Se devolvio el podcast: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió el Podcast: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió el Podcast: " + getTitulo(), usuario.getTelefono());
+        }
     }
 
 }

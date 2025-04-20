@@ -28,27 +28,44 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
     }
 
     @Override
-    public void prestar() {
+    public void prestar(Usuario usuario) {
         if (!estaDisponible()) {
             throw new RecursoNoDisponibleException("No se puede prestar la REVISTA " + getTitulo() + " No disponible");
         }
         actualizarEstado(EstadoRecurso.PRESTADO);
-
         System.out.println("Revista prestado.");
-        servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se presto la revista: " + getTitulo(), usuario.getTelefono());
+        }
+
     }
 
     @Override
-    public void devolver() {
+    public void devolver(Usuario usuario) {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("Revista devuelto.");
-        servicioNotificaciones.enviarNotificaciones("Se devolvio la revista: " + getTitulo());
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió la revista: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se devolvió la revista: " + getTitulo(), usuario.getTelefono());
+        }
+
     }
 
     @Override
-    public void renovar() {
+    public void renovar(Usuario usuario) {
         System.out.println("Revista renovado.");
-        servicioNotificaciones.enviarNotificaciones(("Se renovo la revista: " + getTitulo()));
+
+        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
+            servicioNotificaciones.enviarNotificaciones("Se renovo la revista: " + getTitulo(), usuario.getMail());
+        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
+            servicioNotificaciones.enviarNotificaciones("Se renovo la revista: " + getTitulo(), usuario.getTelefono());
+        }
+
     }
 
 }

@@ -7,8 +7,8 @@ public class ServicioNotificacionesMail implements ServicioNotificaciones {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
-    public void enviarNotificaciones(String mensaje) {
-        NotificacionesMail notificacion = new NotificacionesMail(mensaje, "sofi@mail.com");
+    public void enviarNotificaciones(String mensaje, String destinatario) {
+        NotificacionesMail notificacion = new NotificacionesMail(mensaje, destinatario);
         executor.execute(notificacion::enviar);
     }
 

@@ -51,7 +51,7 @@ public class Consola {
         System.out.println("0. Volver al menú principal");
     }
 
-    public void mostrarMenuPrestamos(GestorBiblioteca gestor, ServicioPrestamos servicioPrestamos) {
+    public void mostrarMenuPrestamos(GestorBiblioteca gestor, ServicioPrestamos servicioPrestamos, Usuario usuario) {
         System.out.println("=== Menú de Préstamos ===");
         System.out.println("1. Realizar un préstamo");
         System.out.println("2. Devolver un recurso");
@@ -66,7 +66,7 @@ public class Consola {
                 realizarPrestamoDesdeConsola(gestor, servicioPrestamos);
                 break;
             case 2:
-                devolverRecursoDesdeConsola(gestor, servicioPrestamos);
+                devolverRecursoDesdeConsola(gestor, servicioPrestamos, usuario);
                 break;
             case 3:
                 mostrarPrestamos(servicioPrestamos);
@@ -132,11 +132,11 @@ public class Consola {
         }
     }
 
-    public void prestarRecursos(RecursoDigitalBase recurso) {
+    public void prestarRecursos(RecursoDigitalBase recurso, Usuario usuario) {
         System.out.println("=== Prestar recursos ===");
         if (recurso instanceof Prestable) {
             try {
-                ((Prestable) recurso).prestar();
+                ((Prestable) recurso).prestar(usuario);
                 System.out.println("Prestamo exitoso");
             } catch (RecursoNoDisponibleException e) {
                 System.out.println( e.getMessage());
@@ -169,7 +169,7 @@ public class Consola {
     }
 
 
-    private void devolverRecursoDesdeConsola(GestorBiblioteca gestor, ServicioPrestamos servicioPrestamos) {
+    private void devolverRecursoDesdeConsola(GestorBiblioteca gestor, ServicioPrestamos servicioPrestamos, Usuario usuario) {
         scanner.nextLine(); // limpiar buffer
         System.out.print("Ingrese el título del recurso a devolver: ");
         String titulo = scanner.nextLine();
@@ -183,7 +183,7 @@ public class Consola {
 
         RecursoDigital recurso = recursos.get(0);
 
-        servicioPrestamos.devolver(recurso);
+        servicioPrestamos.devolver(recurso, usuario);
     }
 
     private void mostrarPrestamosPorUsuario(ServicioPrestamos servicioPrestamos, GestorBiblioteca gestor) {
