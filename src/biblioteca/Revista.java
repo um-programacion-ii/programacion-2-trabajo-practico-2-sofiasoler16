@@ -27,6 +27,7 @@ public class Revista extends RecursoDigitalBase implements Renovable, Prestable 
         return getEstado() == EstadoRecurso.DISPONIBLE;
     }
 
+    
     @Override
     public synchronized void prestar(Usuario usuario) {
         if (!estaDisponible()) {
