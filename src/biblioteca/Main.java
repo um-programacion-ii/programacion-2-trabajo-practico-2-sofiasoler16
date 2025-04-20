@@ -8,8 +8,9 @@ public class Main {
 
         Consola consola = new Consola();
 
-        ServicioNotificaciones mail = new ServicioNotificacionesMail();
-        ServicioNotificaciones sms = new ServicioNotificacionesSMS();
+        ServicioNotificacionesMail mail = new ServicioNotificacionesMail();
+        ServicioNotificacionesSMS sms = new ServicioNotificacionesSMS();
+
         CategoriaRecurso tecnologia = CategoriaRecurso.TECNOLOGIA;
         CategoriaRecurso novela = CategoriaRecurso.NOVELA;
         CategoriaRecurso historia = CategoriaRecurso.HISTORIA;
@@ -20,6 +21,7 @@ public class Main {
 
         consola.mostrarMenu();
 
+        Usuario usuario1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "5492615882205");
         int opcion = 2;
 
         if (opcion == 2) {
@@ -28,7 +30,7 @@ public class Main {
 
             Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, mail, CategoriaRecurso.ROMANCE);
 
-            libro1.prestar();
+            libro1.prestar(usuario1);
             
             System.out.println("Libro creado:");
             //Compruebo que sirva mostrarinformacion() de clase base
@@ -57,7 +59,7 @@ public class Main {
 
         GestorBiblioteca gestorBiblioteca = new GestorBiblioteca();
 
-        Usuario usuario1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com");
+
         gestorBiblioteca.agregarUsuario(usuario1);
 
         Libro libro3  = new Libro("El Principito", 101, "Editorial Salamandra", "Antoine", 1943, mail, CategoriaRecurso.FICCION);
@@ -101,18 +103,18 @@ public class Main {
 
         consola.buscarUsuarioPorId(gestorBiblioteca);
 
-        ((Prestable) podcast).prestar(); // presto el podcast
+        ((Prestable) podcast).prestar(usuario1); // presto el podcast
 
-        consola.prestarRecursos(podcast);
+        consola.prestarRecursos(podcast, usuario1);
 
         System.out.println("---Pruebas servicioPrestamo---");
 
         ServicioPrestamos servicioPrestamos = new ServicioPrestamos(gestorBiblioteca);
         servicioPrestamos.prestar(libro2, usuario1);
-        servicioPrestamos.devolver(libro2);
+        // servicioPrestamos.devolver(libro2);
 
 
-        consola.mostrarMenuPrestamos(gestorBiblioteca, servicioPrestamos);
+        consola.mostrarMenuPrestamos(gestorBiblioteca, servicioPrestamos, usuario1);
 
         System.out.println("---Pruebas servicioReserva---");
 
@@ -122,8 +124,18 @@ public class Main {
 
         servicioReserva.agregarReserva(reserva1);
 
-        consola.mostrarReservasDesdeConsola(servicioReserva);
+        // consola.mostrarReservasDesdeConsola(servicioReserva);
 
+        servicioReserva.mostrarReservas();
+
+
+        Notificaciones noti1 = new NotificacionesMail("Tu libro fue prestado con éxito", usuario1.getMail());
+        Notificaciones noti2 = new NotificacionesSMS("Recordatorio de devolución", usuario1.getTelefono());
+        noti1.enviar();
+        noti2.enviar();
+
+        mail.cerrar();
+        sms.cerrar();
 
     }
 

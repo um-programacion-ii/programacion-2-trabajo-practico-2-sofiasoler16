@@ -5,12 +5,14 @@ public class Usuario {
     private String apellido;
     private int id;
     private String mail;
+    private String telefono;
 
-    public Usuario(String nombre, String apellido, int id, String mail) {
+    public Usuario(String nombre, String apellido, int id, String mail, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = id;
         this.mail = mail;
+        this.telefono = telefono;
     }
 
     public String getNombre() {
@@ -36,5 +38,13 @@ public class Usuario {
     }
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }
