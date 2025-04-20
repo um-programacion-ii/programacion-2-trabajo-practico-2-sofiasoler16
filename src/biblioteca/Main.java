@@ -128,14 +128,44 @@ public class Main {
 
         servicioReserva.mostrarReservas();
 
+        System.out.println("---Pruebas Notificaciones---");
 
         Notificaciones noti1 = new NotificacionesMail("Tu libro fue prestado con éxito", usuario1.getMail());
         Notificaciones noti2 = new NotificacionesSMS("Recordatorio de devolución", usuario1.getTelefono());
         noti1.enviar();
         noti2.enviar();
 
-        mail.cerrar();
-        sms.cerrar();
+
+        System.out.println("---Pruebas Concurrencia---");
+
+        AudioLibro audioLibroTest = new AudioLibro("Audiolibro Concurrencia", 999, "1h", sms, CategoriaRecurso.CIENCIA);
+
+        Usuario usuarioA = new Usuario("UsuarioA", "Perez", 101, "a@correo.com", "123456789");
+        Usuario usuarioB = new Usuario("UsuarioB", "Gomez", 102, "b@correo.com", "987654321");
+
+        Thread hilo1 = new Thread(() -> {
+            audioLibroTest.prestar(usuarioA);
+        }, "Hilo-A");
+
+        Thread hilo2 = new Thread(() -> {
+            try {
+                audioLibroTest.prestar(usuarioB);
+            } catch (RecursoNoDisponibleException e) {
+                System.out.println("[HILO Hilo-B] " + e.getMessage());
+            }
+        }, "Hilo-B");
+
+
+        hilo1.start();
+        hilo2.start();
+
+        try {
+            hilo1.join();
+            hilo2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
