@@ -35,12 +35,12 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     }
 
     @Override
-    public boolean estaDisponible() {
+    public synchronized boolean estaDisponible() {
         return getEstado() == EstadoRecurso.DISPONIBLE;
     }
 
     @Override
-    public void prestar(Usuario usuario) {
+    public synchronized void prestar(Usuario usuario) {
         if (!estaDisponible()) {
             throw new RecursoNoDisponibleException("No se puede prestar el LIBRO " + getTitulo() + " No disponible");
         }
