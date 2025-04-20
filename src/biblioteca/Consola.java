@@ -199,7 +199,6 @@ public class Consola {
         }
     }
 
-
     public void mostrarReservasDesdeConsola(ServicioReserva servicioReserva) {
         servicioReserva.mostrarReservas();
     }

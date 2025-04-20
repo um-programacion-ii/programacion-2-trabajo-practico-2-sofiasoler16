@@ -8,8 +8,9 @@ public class Main {
 
         Consola consola = new Consola();
 
-        ServicioNotificaciones mail = new ServicioNotificacionesMail();
-        ServicioNotificaciones sms = new ServicioNotificacionesSMS();
+        ServicioNotificacionesMail mail = new ServicioNotificacionesMail();
+        ServicioNotificacionesSMS sms = new ServicioNotificacionesSMS();
+
         CategoriaRecurso tecnologia = CategoriaRecurso.TECNOLOGIA;
         CategoriaRecurso novela = CategoriaRecurso.NOVELA;
         CategoriaRecurso historia = CategoriaRecurso.HISTORIA;
@@ -109,7 +110,7 @@ public class Main {
 
         ServicioPrestamos servicioPrestamos = new ServicioPrestamos(gestorBiblioteca);
         servicioPrestamos.prestar(libro2, usuario1);
-        servicioPrestamos.devolver(libro2);
+        // servicioPrestamos.devolver(libro2);
 
 
         consola.mostrarMenuPrestamos(gestorBiblioteca, servicioPrestamos);
@@ -122,8 +123,18 @@ public class Main {
 
         servicioReserva.agregarReserva(reserva1);
 
-        consola.mostrarReservasDesdeConsola(servicioReserva);
+        // consola.mostrarReservasDesdeConsola(servicioReserva);
 
+        servicioReserva.mostrarReservas();
+
+
+        Notificaciones noti1 = new NotificacionesMail("Tu libro fue prestado con éxito", "sofia@mail.com");
+        Notificaciones noti2 = new NotificacionesSMS("Recordatorio de devolución", "1234567890");
+        noti1.enviar();
+        noti2.enviar();
+
+        mail.cerrar();
+        sms.cerrar();
 
     }
 
