@@ -4,9 +4,11 @@ import java.util.List;
 
 public class ServicioPrestamos {
     private GestorBiblioteca gestor;
+    private final ServicioAlertas servicioAlertas;
 
     public ServicioPrestamos(GestorBiblioteca gestor) {
         this.gestor = gestor;
+        this.servicioAlertas = new ServicioAlertas(gestor);
     }
 
     public void prestar(RecursoDigital recurso, Usuario usuario) {
@@ -24,6 +26,12 @@ public class ServicioPrestamos {
             gestor.agregarPrestamo(prestamo);
 
             System.out.println("Préstamo exitoso: " + prestamo);
+
+            List<AlertaVencimiento> alertas = servicioAlertas.obtenerAlertasPendientes();
+            for (AlertaVencimiento alerta : alertas) {
+                alerta.mostrarAlerta();
+            }
+
         } catch (RecursoNoDisponibleException e) {
             System.out.println( e.getMessage());
         }

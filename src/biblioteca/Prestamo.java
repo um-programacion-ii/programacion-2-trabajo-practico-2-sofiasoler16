@@ -13,8 +13,8 @@ public class Prestamo {
     public Prestamo(RecursoDigital recurso, Usuario usuario) {
         this.recurso = recurso;
         this.usuario = usuario;
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
+        this.fechaPrestamo = LocalDate.now();
+        this.fechaDevolucion = fechaPrestamo.plusDays(7);
     }
 
     public RecursoDigital getRecurso() {

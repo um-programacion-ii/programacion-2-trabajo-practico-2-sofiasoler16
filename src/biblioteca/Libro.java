@@ -75,7 +75,6 @@ public class Libro extends RecursoDigitalBase implements Renovable, Prestable {
     @Override
     public synchronized void renovar(Usuario usuario) {
         System.out.println("[HILO " + Thread.currentThread().getName() + "] → Intentando renovar: " + getTitulo());
-        System.out.println("Libro renovado.");
 
         if (!getEstado().equals(EstadoRecurso.PRESTADO)) {
             System.out.println("[HILO " + Thread.currentThread().getName() + "] No se puede renovar: el recurso no está prestado.");

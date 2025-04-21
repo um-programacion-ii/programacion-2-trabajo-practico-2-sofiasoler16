@@ -231,6 +231,39 @@ public class Consola {
         }
     }
 
+    public void mostrarAlertas(GestorBiblioteca gestor) {
+        ServicioAlertas servicioAlertas = new ServicioAlertas(gestor);
+        List<AlertaVencimiento> alertas = servicioAlertas.obtenerAlertasPendientes();
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== ALERTAS POR VENCIMIENTO DE PRÉSTAMOS ===");
+        if (alertas.isEmpty()) {
+            System.out.println("No hay alertas por mostrar.");
+        } else {
+            for (AlertaVencimiento alerta : alertas) {
+                alerta.mostrarAlerta();
+
+                RecursoDigital recursoDigital = alerta.getPrestamo().getRecurso();
+                Usuario usuario = alerta.getPrestamo().getUsuario();
+
+                if (recursoDigital instanceof Renovable) {
+                    System.out.print("¿Desea renovar este recurso? (si/no): ");
+                    String respuesta = scanner.nextLine().trim().toLowerCase();
+
+                    if (respuesta.equals("si")) {
+                        ((Renovable) recursoDigital).renovar(usuario);
+                    } else {
+                        System.out.println("No se renovó.");
+                    }
+                } else {
+                    System.out.println("Este recurso no es renovable.");
+                }
+            }
+        }
+    }
+
+
     public void mostrarReservasDesdeConsola(ServicioReserva servicioReserva) {
         servicioReserva.mostrarReservas();
     }
