@@ -36,4 +36,18 @@ public class ServicioReportes {
                 .forEach(entry -> System.out.println(entry.getKey().getNombre() + " - Préstamos: " + entry.getValue()));
     }
 
+    public void reporteEstadisticasPorCategoria() {
+        System.out.println("===Estadísticas por categoría===");
+
+        Map<CategoriaRecurso, Long> conteo = gestor.getPrestamos().stream()
+                .collect(Collectors.groupingBy(
+                        p -> ((RecursoDigitalBase)p.getRecurso()).getCategoria(),
+                        Collectors.counting()
+                ));
+
+        conteo.forEach((cat, cantidad) ->
+                System.out.println(cat + ": " + cantidad + " préstamos")
+        );
+    }
+
 }
