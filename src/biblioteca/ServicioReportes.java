@@ -24,4 +24,16 @@ public class ServicioReportes {
                 .forEach(entry -> System.out.println(entry.getKey().getIdentificador() + " - Préstamos: " + entry.getValue()));
     }
 
+    public void reporteUsuariosMasActivos(int limite) {
+        System.out.println("===Usuarios mas activos===");
+
+        Map<Usuario, Long> conteo = gestor.getPrestamos().stream()
+                .collect(Collectors.groupingBy(Prestamo::getUsuario, Collectors.counting()));
+
+        conteo.entrySet().stream()
+                .sorted(Map.Entry.<Usuario, Long>comparingByValue().reversed())
+                .limit(limite)
+                .forEach(entry -> System.out.println(entry.getKey().getNombre() + " - Préstamos: " + entry.getValue()));
+    }
+
 }
