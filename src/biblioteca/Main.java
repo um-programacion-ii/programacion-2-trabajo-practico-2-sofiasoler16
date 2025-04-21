@@ -173,10 +173,11 @@ public class Main {
 //        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
 //
 
+        ((Prestable) libro3).prestar(usuario1);
         Prestamo prestamo = new Prestamo(libro3, usuario1);
-
         prestamo.setFechaDevolucion(LocalDate.now());
         gestorBiblioteca.agregarPrestamo(prestamo);
+
 
         ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
         consola.mostrarAlertas(gestorBiblioteca);
