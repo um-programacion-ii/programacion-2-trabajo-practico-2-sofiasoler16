@@ -166,11 +166,20 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("---Prueba menu reportes---");
+//        System.out.println("---Prueba menu reportes---");
+//
+//        ServicioReportes servicioReportes = new ServicioReportes(gestorBiblioteca);
+//
+//        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
+//
 
-        ServicioReportes servicioReportes = new ServicioReportes(gestorBiblioteca);
+        Prestamo prestamo = new Prestamo(libro3, usuario1);
 
-        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
+        prestamo.setFechaDevolucion(LocalDate.now());
+        gestorBiblioteca.agregarPrestamo(prestamo);
+
+        ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
+        consola.mostrarAlertas(gestorBiblioteca);
 
 
     }

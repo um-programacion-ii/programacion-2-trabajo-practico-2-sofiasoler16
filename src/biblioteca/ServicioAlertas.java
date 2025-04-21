@@ -1,6 +1,8 @@
 package biblioteca;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServicioAlertas {
     private GestorBiblioteca gestor;
@@ -10,8 +12,9 @@ public class ServicioAlertas {
         this.gestor = gestor;
     }
 
-    public void verificarAlertasVencimiento() {
+    public List<AlertaVencimiento> obtenerAlertasPendientes(){
         LocalDate fechaActual = LocalDate.now();
+        List<AlertaVencimiento> alertas = new ArrayList<>();
 
         for (Prestamo prestamo : gestor.getPrestamos()) {
             LocalDate vencimiento = prestamo.getFechaDevolucion();
@@ -23,5 +26,14 @@ public class ServicioAlertas {
                 }
             }
         }
+        return alertas;
     }
+
+    public List<AlertaVencimiento> obtenerAlertasPorUsuario(Usuario usuario) {
+        return gestor.getPrestamos().stream()
+                .filter(p -> p.getUsuario().getId() == usuario.getId())
+                .map(p -> new AlertaVencimiento(p, "Vencido"))
+                .toList();
+    }
+
 }

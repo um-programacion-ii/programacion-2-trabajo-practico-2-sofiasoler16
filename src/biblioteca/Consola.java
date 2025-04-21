@@ -231,6 +231,21 @@ public class Consola {
         }
     }
 
+    public void mostrarAlertas(GestorBiblioteca gestor) {
+        ServicioAlertas servicioAlertas = new ServicioAlertas(gestor);
+        List<AlertaVencimiento> alertas = servicioAlertas.obtenerAlertasPendientes();
+
+        System.out.println("=== ALERTAS POR VENCIMIENTO DE PRÉSTAMOS ===");
+        if (alertas.isEmpty()) {
+            System.out.println("No hay alertas por mostrar.");
+        } else {
+            for (AlertaVencimiento alerta : alertas) {
+                alerta.mostrarAlerta();
+            }
+        }
+    }
+
+
     public void mostrarReservasDesdeConsola(ServicioReserva servicioReserva) {
         servicioReserva.mostrarReservas();
     }
