@@ -166,6 +166,12 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("---Prueba menu reportes---");
+
+        ServicioReportes servicioReportes = new ServicioReportes(gestorBiblioteca);
+
+        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
+
 
     }
 
