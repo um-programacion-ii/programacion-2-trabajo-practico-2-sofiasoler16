@@ -20,9 +20,9 @@ public class ServicioAlertas {
             LocalDate vencimiento = prestamo.getFechaDevolucion();
             if (vencimiento != null) {
                 if (vencimiento.equals(fechaActual)) {
-                    new AlertaVencimiento(prestamo, "Vencido").mostrarAlerta();
+                    alertas.add(new AlertaVencimiento(prestamo, "Hoy vence"));
                 } else if (vencimiento.minusDays(1).equals(fechaActual)) {
-                    new AlertaVencimiento(prestamo, "Recordatorio").mostrarAlerta();
+                    alertas.add(new AlertaVencimiento(prestamo, "Mañana vence"));
                 }
             }
         }

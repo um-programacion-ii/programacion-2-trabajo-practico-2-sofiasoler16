@@ -29,7 +29,6 @@ public class AlertaVencimiento {
 
         System.out.println("Usuario: " + prestamo.getUsuario().getNombre());
         System.out.println("Fecha devolución esperada: " + fechaVencimiento);
-        System.out.println("¿Desea renovar el préstamo?");
     }
 
 
