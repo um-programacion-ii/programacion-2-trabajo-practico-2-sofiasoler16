@@ -11,6 +11,7 @@ public class Main {
         ServicioNotificacionesMail mail = new ServicioNotificacionesMail();
         ServicioNotificacionesSMS sms = new ServicioNotificacionesSMS();
 
+
         CategoriaRecurso tecnologia = CategoriaRecurso.TECNOLOGIA;
         CategoriaRecurso novela = CategoriaRecurso.NOVELA;
         CategoriaRecurso historia = CategoriaRecurso.HISTORIA;
@@ -58,6 +59,9 @@ public class Main {
         System.out.println("---Pruebas Gestor Biblioteca---");
 
         GestorBiblioteca gestorBiblioteca = new GestorBiblioteca();
+
+        ServicioReserva servicioReserva = new ServicioReserva();
+        ServicioPrestamos servicioPrestamos = new ServicioPrestamos(gestorBiblioteca, servicioReserva);
 
 
         gestorBiblioteca.agregarUsuario(usuario1);
@@ -109,7 +113,6 @@ public class Main {
 
         System.out.println("---Pruebas servicioPrestamo---");
 
-        ServicioPrestamos servicioPrestamos = new ServicioPrestamos(gestorBiblioteca);
         servicioPrestamos.prestar(libro2, usuario1);
         // servicioPrestamos.devolver(libro2);
 
@@ -118,7 +121,6 @@ public class Main {
 
         System.out.println("---Pruebas servicioReserva---");
 
-        ServicioReserva servicioReserva = new ServicioReserva();
 
         Reserva reserva1 = new Reserva(usuario1, podcast);
 
@@ -136,35 +138,35 @@ public class Main {
         noti2.enviar();
 
 
-        System.out.println("---Pruebas Concurrencia---");
-
-        AudioLibro audioLibroTest = new AudioLibro("Audiolibro Concurrencia", 999, "1h", sms, CategoriaRecurso.CIENCIA);
-
-        Usuario usuarioA = new Usuario("UsuarioA", "Perez", 101, "a@correo.com", "123456789");
-        Usuario usuarioB = new Usuario("UsuarioB", "Gomez", 102, "b@correo.com", "987654321");
-
-        Thread hilo1 = new Thread(() -> {
-            audioLibroTest.prestar(usuarioA);
-        }, "Hilo-A");
-
-        Thread hilo2 = new Thread(() -> {
-            try {
-                audioLibroTest.prestar(usuarioB);
-            } catch (RecursoNoDisponibleException e) {
-                System.out.println("[HILO Hilo-B] " + e.getMessage());
-            }
-        }, "Hilo-B");
-
-
-        hilo1.start();
-        hilo2.start();
-
-        try {
-            hilo1.join();
-            hilo2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        System.out.println("---Pruebas Concurrencia---");
+//
+//        AudioLibro audioLibroTest = new AudioLibro("Audiolibro Concurrencia", 999, "1h", sms, CategoriaRecurso.CIENCIA);
+//
+//        Usuario usuarioA = new Usuario("UsuarioA", "Perez", 101, "a@correo.com", "123456789");
+//        Usuario usuarioB = new Usuario("UsuarioB", "Gomez", 102, "b@correo.com", "987654321");
+//
+//        Thread hilo1 = new Thread(() -> {
+//            audioLibroTest.prestar(usuarioA);
+//        }, "Hilo-A");
+//
+//        Thread hilo2 = new Thread(() -> {
+//            try {
+//                audioLibroTest.prestar(usuarioB);
+//            } catch (RecursoNoDisponibleException e) {
+//                System.out.println("[HILO Hilo-B] " + e.getMessage());
+//            }
+//        }, "Hilo-B");
+//
+//
+//        hilo1.start();
+//        hilo2.start();
+//
+//        try {
+//            hilo1.join();
+//            hilo2.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 //        System.out.println("---Prueba menu reportes---");
 //
@@ -182,7 +184,17 @@ public class Main {
         ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
         consola.mostrarAlertas(gestorBiblioteca);
 
+        servicioPrestamos.prestar(libro2, usuario1);
 
+        Usuario usuario2 = new Usuario("Juanito", "Martínez", 2, "juani@mail.com", "5492615999999");
+        gestorBiblioteca.agregarUsuario(usuario2);
+
+        Reserva reserva2 = new Reserva(usuario2, libro2);
+        servicioReserva.agregarReserva(reserva2);
+
+        servicioReserva.mostrarReservas();
+
+        servicioPrestamos.devolver(libro2, usuario1);
     }
 
 }

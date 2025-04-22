@@ -8,10 +8,10 @@ public class ServicioPrestamos {
     private final ServicioAlertas servicioAlertas;
     private final ServicioReserva servicioReserva;
 
-    public ServicioPrestamos(GestorBiblioteca gestor) {
+    public ServicioPrestamos(GestorBiblioteca gestor, ServicioReserva servicioReserva) {
         this.gestor = gestor;
         this.servicioAlertas = new ServicioAlertas(gestor);
-        this.servicioReserva = new ServicioReserva();
+        this.servicioReserva = servicioReserva;
     }
 
     public void prestar(RecursoDigital recurso, Usuario usuario) {
