@@ -184,6 +184,9 @@ public class Main {
         ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
         consola.mostrarAlertas(gestorBiblioteca);
 
+        Recordatorios recordatorios = new Recordatorios(servicioAlertas);
+        recordatorios.iniciar();
+
         servicioPrestamos.prestar(libro2, usuario1);
 
         Usuario usuario2 = new Usuario("Juanito", "Martínez", 2, "juani@mail.com", "5492615999999");
@@ -195,6 +198,9 @@ public class Main {
         servicioReserva.mostrarReservas();
 
         servicioPrestamos.devolver(libro2, usuario1);
+
+
+
     }
 
 }
