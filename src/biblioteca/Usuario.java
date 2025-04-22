@@ -6,13 +6,17 @@ public class Usuario {
     private int id;
     private String mail;
     private String telefono;
+    private TipoNotificacion tipoNotificacion;
+    private NivelUrgencia nivelMinimoUrgencia;
 
-    public Usuario(String nombre, String apellido, int id, String mail, String telefono) {
+    public Usuario(String nombre, String apellido, int id, String mail, String telefono, TipoNotificacion tipoNotificacion, NivelUrgencia nivelMinimoUrgencia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = id;
         this.mail = mail;
         this.telefono = telefono;
+        this.tipoNotificacion = tipoNotificacion;
+        this.nivelMinimoUrgencia = nivelMinimoUrgencia;
     }
 
     public String getNombre() {
@@ -46,5 +50,17 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public TipoNotificacion getTipoNotificacion() {
+        return tipoNotificacion;
+    }
+
+    public NivelUrgencia getNivelMinimoUrgencia() {
+        return nivelMinimoUrgencia;
+    }
+
+    public boolean deseaNotificar(NivelUrgencia urgencia) {
+        return urgencia.ordinal() >= nivelMinimoUrgencia.ordinal();
     }
 }

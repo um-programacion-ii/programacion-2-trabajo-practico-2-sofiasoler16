@@ -28,16 +28,21 @@ public class AlertaVencimiento {
     }
 
     public void mostrarAlerta() {
+
+        if (!prestamo.getUsuario().deseaNotificar(nivelUrgencia)) return;
+
         LocalDate hoy = LocalDate.now();
         LocalDate fechaVencimiento = prestamo.getFechaDevolucion();
         long diasRestantes = hoy.until(fechaVencimiento).getDays();
 
+        System.out.println("ALERTA [" + nivelUrgencia + "]: " + tipoAlerta.toUpperCase());
+
         if (diasRestantes == 0) {
-            System.out.println("ALERTA: Hoy vence el préstamo del recurso: " + prestamo.getRecurso().getIdentificador());
+            System.out.println("Hoy vence el préstamo del recurso: " + prestamo.getRecurso().getIdentificador());
         } else if (diasRestantes < 0) {
-            System.out.println("ALERTA: Vencido → " + prestamo.getRecurso().getIdentificador());
+            System.out.println("Vencido → " + prestamo.getRecurso().getIdentificador());
         } else if (diasRestantes == 1) {
-            System.out.println("ALERTA: Mañana vence el préstamo del recurso: " + prestamo.getRecurso().getIdentificador());
+            System.out.println("Mañana vence el préstamo del recurso: " + prestamo.getRecurso().getIdentificador());
         } else {
             return;
         }

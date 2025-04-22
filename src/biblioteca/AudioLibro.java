@@ -3,8 +3,8 @@ package biblioteca;
 public class AudioLibro extends RecursoDigitalBase implements Prestable {
     private String tiempo;
 
-    public AudioLibro(String titulo, int id, String tiempo, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
-        super(titulo, id, servicioNotificaciones, categoriaRecurso);
+    public AudioLibro(String titulo, int id, String tiempo, CategoriaRecurso categoriaRecurso) {
+        super(titulo, id, categoriaRecurso);
         this.tiempo = tiempo;
     }
 
@@ -38,11 +38,7 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
         actualizarEstado(EstadoRecurso.PRESTADO);
         System.out.println("[HILO " + Thread.currentThread().getName() + "] Préstamo exitoso de: " + getTitulo());
 
-        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
-            servicioNotificaciones.enviarNotificaciones("Se prestó el AudioLibro: " + getTitulo(), usuario.getMail());
-        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
-            servicioNotificaciones.enviarNotificaciones("Se prestó el AudioLibro: " + getTitulo(), usuario.getTelefono());
-        }
+        ServicioNotificadorPreferencia.notificar("Se prestó el AudioLibro: " + getTitulo(), usuario);
     }
 
     @Override
@@ -52,11 +48,7 @@ public class AudioLibro extends RecursoDigitalBase implements Prestable {
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("[HILO " + Thread.currentThread().getName() + "] Devolución exitosa de: " + getTitulo());
 
-        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
-            servicioNotificaciones.enviarNotificaciones("Se devolvió el AudioLibro: " + getTitulo(), usuario.getMail());
-        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
-            servicioNotificaciones.enviarNotificaciones("Se devolvió el AudioLibro: " + getTitulo(), usuario.getTelefono());
-        }
+        ServicioNotificadorPreferencia.notificar("Se devolvió el AudioLibro: " + getTitulo(), usuario);
 
         notifyAll();
     }

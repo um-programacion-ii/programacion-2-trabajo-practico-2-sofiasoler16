@@ -3,14 +3,12 @@ package biblioteca;
 public abstract class RecursoDigitalBase implements RecursoDigital{
     private String titulo;
     private int id;
-    protected ServicioNotificaciones servicioNotificaciones;
     private CategoriaRecurso categoriaRecurso;
     private EstadoRecurso estado = EstadoRecurso.DISPONIBLE;
 
-    public RecursoDigitalBase(String titulo, int id, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
+    public RecursoDigitalBase(String titulo, int id, CategoriaRecurso categoriaRecurso) {
         this.titulo = titulo;
         this.id = id;
-        this.servicioNotificaciones = servicioNotificaciones;
         this.categoriaRecurso = categoriaRecurso;
     }
 

@@ -3,8 +3,8 @@ package biblioteca;
 public class Podcast extends RecursoDigitalBase implements Prestable{
     private String canal;
 
-    public Podcast(String titulo, int id, String canal, ServicioNotificaciones servicioNotificaciones, CategoriaRecurso categoriaRecurso) {
-        super(titulo, id, servicioNotificaciones, categoriaRecurso);
+    public Podcast(String titulo, int id, String canal, CategoriaRecurso categoriaRecurso) {
+        super(titulo, id, categoriaRecurso);
         this.canal = canal;
     }
 
@@ -38,11 +38,7 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
         actualizarEstado(EstadoRecurso.PRESTADO);
         System.out.println("[HILO " + Thread.currentThread().getName() + "] Préstamo exitoso de: " + getTitulo());
 
-        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
-            servicioNotificaciones.enviarNotificaciones("Se prestó el Podcast: " + getTitulo(), usuario.getMail());
-        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
-            servicioNotificaciones.enviarNotificaciones("Se prestó el Podcast: " + getTitulo(), usuario.getTelefono());
-        }
+        ServicioNotificadorPreferencia.notificar("Se prestó el Podcast: " + getTitulo(), usuario);
 
     }
 
@@ -53,12 +49,7 @@ public class Podcast extends RecursoDigitalBase implements Prestable{
         actualizarEstado(EstadoRecurso.DISPONIBLE);
         System.out.println("[HILO " + Thread.currentThread().getName() + "] Devolución exitosa de: " + getTitulo());
 
-
-        if (servicioNotificaciones instanceof ServicioNotificacionesMail) {
-            servicioNotificaciones.enviarNotificaciones("Se devolvió el Podcast: " + getTitulo(), usuario.getMail());
-        } else if (servicioNotificaciones instanceof ServicioNotificacionesSMS) {
-            servicioNotificaciones.enviarNotificaciones("Se devolvió el Podcast: " + getTitulo(), usuario.getTelefono());
-        }
+        ServicioNotificadorPreferencia.notificar("Se devolvio el Podcast: " + getTitulo(), usuario);
     }
 
 }
