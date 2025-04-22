@@ -1,13 +1,24 @@
 package biblioteca;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class AlertaDisponibilidad {
     private final Reserva reserva;
     private final String mensaje;
+    private NivelUrgencia nivelUrgencia;
 
     //Constructor
     public AlertaDisponibilidad(Reserva reserva) {
         this.reserva = reserva;
         this.mensaje = "El recurso reservado esta DISPONIBLE";
+        this.nivelUrgencia = calcularUrgencia();
+    }
+
+    private NivelUrgencia calcularUrgencia() {
+        long diasDesdeDisponibilidad = ChronoUnit.DAYS.between(reserva.getFechaReserva(), LocalDate.now());
+
+        return NivelUrgencia.INFO;
     }
 
     public void mostrarAlerta() {

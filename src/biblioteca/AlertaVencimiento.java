@@ -5,11 +5,26 @@ import java.time.LocalDate;
 public class AlertaVencimiento {
     private Prestamo prestamo;
     private String tipoAlerta;
+    private NivelUrgencia nivelUrgencia;
 
     //Constructor
     public AlertaVencimiento(Prestamo prestamo, String tipoAlerta) {
         this.prestamo = prestamo;
         this.tipoAlerta = tipoAlerta;
+        this.nivelUrgencia = calcularUrgencia(prestamo);
+    }
+
+    public NivelUrgencia calcularUrgencia(Prestamo prestamo) {
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate devolucion = prestamo.getFechaDevolucion();
+
+        if (devolucion == null) return NivelUrgencia.INFO;
+
+        long dias = devolucion.toEpochDay() - fechaActual.toEpochDay();
+
+        if (dias == 1) return NivelUrgencia.WARNING;
+        if (dias <= 0) return NivelUrgencia.ERROR;
+        return  NivelUrgencia.INFO;
     }
 
     public void mostrarAlerta() {
