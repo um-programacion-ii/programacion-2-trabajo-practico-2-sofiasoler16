@@ -16,8 +16,6 @@ public class AlertaDisponibilidad {
     }
 
     private NivelUrgencia calcularUrgencia() {
-        long diasDesdeDisponibilidad = ChronoUnit.DAYS.between(reserva.getFechaReserva(), LocalDate.now());
-
         return NivelUrgencia.INFO;
     }
 

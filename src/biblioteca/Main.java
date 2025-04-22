@@ -184,7 +184,9 @@ public class Main {
         ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
         consola.mostrarAlertas(gestorBiblioteca);
 
-        Recordatorios recordatorios = new Recordatorios(servicioAlertas);
+        HistorialAlertas historialAlertas = new HistorialAlertas();
+
+        Recordatorios recordatorios = new Recordatorios(servicioAlertas, historialAlertas);
         recordatorios.iniciar();
 
         servicioPrestamos.prestar(libro2, usuario1);
@@ -198,6 +200,10 @@ public class Main {
         servicioReserva.mostrarReservas();
 
         servicioPrestamos.devolver(libro2, usuario1);
+
+        recordatorios.iniciar();
+
+        historialAlertas.mostrarHistorial();
 
 
 

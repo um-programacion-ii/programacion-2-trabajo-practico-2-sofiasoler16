@@ -22,8 +22,8 @@ public class AlertaVencimiento {
 
         long dias = devolucion.toEpochDay() - fechaActual.toEpochDay();
 
-        if (dias == 1) return NivelUrgencia.WARNING;
-        if (dias <= 0) return NivelUrgencia.ERROR;
+        if (dias == 1 || dias == 0) return NivelUrgencia.WARNING;
+        if (dias < 0) return NivelUrgencia.ERROR;
         return  NivelUrgencia.INFO;
     }
 
@@ -46,6 +46,9 @@ public class AlertaVencimiento {
         System.out.println("Fecha devolución esperada: " + fechaVencimiento);
     }
 
+    public NivelUrgencia getNivelUrgencia() {
+        return nivelUrgencia;
+    }
 
     public Prestamo getPrestamo() {
         return prestamo;
