@@ -202,6 +202,8 @@ public class Main {
 
         historialAlertas.mostrarHistorial();
 
+        ((Renovable) libro3).renovar(usuario1);
+        ((Prestable) libro3).devolver(usuario2);
 
 
     }
