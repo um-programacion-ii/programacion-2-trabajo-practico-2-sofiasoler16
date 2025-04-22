@@ -35,5 +35,17 @@ public class ServicioReserva {
         }
     }
 
+    public Reserva obtenerSiguienteReserva(RecursoDigital recurso) {
+        for (Reserva reserva : colaReservas) {
+            if (reserva.getRecurso().equals(recurso)) {
+                return reserva;
+            }
+        }
+        return null;
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        colaReservas.remove(reserva);
+    }
 
 }

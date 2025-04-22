@@ -1,14 +1,17 @@
 package biblioteca;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class ServicioPrestamos {
     private GestorBiblioteca gestor;
     private final ServicioAlertas servicioAlertas;
+    private final ServicioReserva servicioReserva;
 
-    public ServicioPrestamos(GestorBiblioteca gestor) {
+    public ServicioPrestamos(GestorBiblioteca gestor, ServicioReserva servicioReserva) {
         this.gestor = gestor;
         this.servicioAlertas = new ServicioAlertas(gestor);
+        this.servicioReserva = servicioReserva;
     }
 
     public void prestar(RecursoDigital recurso, Usuario usuario) {
@@ -39,7 +42,7 @@ public class ServicioPrestamos {
 
     public void devolver(RecursoDigital recurso, Usuario usuario) {
         if (!(recurso instanceof Prestable)) {
-            System.out.println("❌ Este recurso no se puede devolver.");
+            System.out.println("Este recurso no se puede devolver.");
             return;
         }
 
@@ -47,7 +50,68 @@ public class ServicioPrestamos {
         recurso.actualizarEstado(EstadoRecurso.DISPONIBLE);
 
         System.out.println("Devolucion exitosa");
+
+        Reserva siguienteReserva = servicioReserva.obtenerSiguienteReserva(recurso);
+
+        if (siguienteReserva != null) {
+            AlertaDisponibilidad alerta = new AlertaDisponibilidad(siguienteReserva);
+            alerta.mostrarAlerta();
+
+            Scanner scanner = new Scanner(System.in);
+            String respuesta = scanner.nextLine();
+
+            if (respuesta.equalsIgnoreCase("si")) {
+                try {
+                    prestar(recurso, siguienteReserva.getUsuario());
+                    servicioReserva.eliminarReserva(siguienteReserva);
+                    System.out.println("🎉 El recurso fue prestado al usuario que lo había reservado.");
+                } catch (RecursoNoDisponibleException e) {
+                    System.out.println("⚠️ El recurso ya no está disponible.");
+                }
+            } else {
+                System.out.println("El usuario decidió no tomar el recurso por ahora.");
+                ofrecerRecursosDisponibles(siguienteReserva.getUsuario());
+            }
+        }
+        }
+
+    private void ofrecerRecursosDisponibles(Usuario usuario) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<RecursoDigital> disponibles = gestor.getRecursos().stream()
+                .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
+                .toList();
+
+        if (disponibles.isEmpty()) {
+            System.out.println("📭 No hay recursos disponibles en este momento.");
+        } else {
+            System.out.println("📚 Recursos disponibles para préstamo:");
+            for (RecursoDigital r : disponibles) {
+                System.out.println(r.getIdentificador());
+            }
+
+            System.out.print("¿Desea tomar alguno en préstamo? (si/no): ");
+            String tomarOtro = scanner.nextLine();
+
+            if (tomarOtro.equalsIgnoreCase("si")) {
+                System.out.print("Ingrese el TITULO del recurso que desea tomar: ");
+                String idTitulo = scanner.nextLine();
+
+
+                List<RecursoDigital> coincidencias = gestor.getRecursos().stream()
+                        .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
+                        .toList();
+
+                if (!coincidencias.isEmpty()) {
+                    RecursoDigital recursoElegido = coincidencias.get(0);
+                    prestar(recursoElegido, usuario);
+                } else {
+                    System.out.println("❌ Recurso no encontrado o no disponible.");
+                }
+            }
+        }
     }
+
 
     public void agregarPrestamo(String titulo, String idUsuario) {
         List<RecursoDigital> encontrados = gestor.buscarPorTitulo(titulo);
