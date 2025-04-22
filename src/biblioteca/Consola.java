@@ -35,31 +35,23 @@ public class Consola {
     public void mostrarMenuReportes(GestorBiblioteca gestor, ServicioReportes servicioReportes) {
         int opcion;
         do {
-            System.out.println("=== Reportes y Estadísticas ===");
-            System.out.println("1. Recursos más prestados (inmediato)");
-            System.out.println("2. Usuarios más activos (inmediato)");
-            System.out.println("3. Estadísticas por categoría (inmediato)");
-            System.out.println("4. Generar reporte en segundo plano");
+            System.out.println("=== Reportes en segundo plano ===");
+            System.out.println("1. Recursos más prestados");
+            System.out.println("2. Usuarios más activos");
+            System.out.println("3. Estadísticas por categoría");
             System.out.println("0. Volver al menú principal");
 
             opcion = pedirOpcion();
-
+            
             switch (opcion) {
                 case 1:
-                    servicioReportes.reporteRecursosMasPrestados(5);
+                    servicioReportes.generarReporteEnSegundoPlano("recursos");
                     break;
                 case 2:
-                    servicioReportes.reporteUsuariosMasActivos(5);
+                    servicioReportes.generarReporteEnSegundoPlano("usuarios");
                     break;
                 case 3:
-                    servicioReportes.reporteEstadisticasPorCategoria();
-                    break;
-                case 4:
-                    scanner.nextLine();
-                    System.out.print("¿Qué tipo de reporte desea generar? (usuarios / recursos / categorias): ");
-                    String tipo = scanner.nextLine();
-
-                    servicioReportes.generarReporteEnSegundoPlano(tipo);
+                    servicioReportes.generarReporteEnSegundoPlano("categorias");
                     break;
                 case 0:
                     System.out.println("Volviendo al menú principal...");
