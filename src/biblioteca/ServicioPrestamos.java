@@ -69,23 +69,49 @@ public class ServicioPrestamos {
                     System.out.println("⚠️ El recurso ya no está disponible.");
                 }
             } else {
-                System.out.println("🔕 El usuario decidió no tomar el recurso por ahora.");
+                System.out.println("El usuario decidió no tomar el recurso por ahora.");
+                ofrecerRecursosDisponibles(siguienteReserva.getUsuario());
+            }
+        }
+        }
 
-                List<RecursoDigital> disponibles = gestor.getRecursos().stream()
+    private void ofrecerRecursosDisponibles(Usuario usuario) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<RecursoDigital> disponibles = gestor.getRecursos().stream()
+                .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
+                .toList();
+
+        if (disponibles.isEmpty()) {
+            System.out.println("📭 No hay recursos disponibles en este momento.");
+        } else {
+            System.out.println("📚 Recursos disponibles para préstamo:");
+            for (RecursoDigital r : disponibles) {
+                System.out.println(r.getIdentificador());
+            }
+
+            System.out.print("¿Desea tomar alguno en préstamo? (si/no): ");
+            String tomarOtro = scanner.nextLine();
+
+            if (tomarOtro.equalsIgnoreCase("si")) {
+                System.out.print("Ingrese el TITULO del recurso que desea tomar: ");
+                String idTitulo = scanner.nextLine();
+
+
+                List<RecursoDigital> coincidencias = gestor.getRecursos().stream()
                         .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
                         .toList();
 
-                if (disponibles.isEmpty()) {
-                    System.out.println("📭 No hay recursos disponibles en este momento.");
+                if (!coincidencias.isEmpty()) {
+                    RecursoDigital recursoElegido = coincidencias.get(0);
+                    prestar(recursoElegido, usuario);
                 } else {
-                    System.out.println("📚 Recursos disponibles para préstamo:");
-                    for (RecursoDigital r : disponibles) {
-                        System.out.println(r.getIdentificador());
-                    }
+                    System.out.println("❌ Recurso no encontrado o no disponible.");
                 }
             }
         }
     }
+
 
     public void agregarPrestamo(String titulo, String idUsuario) {
         List<RecursoDigital> encontrados = gestor.buscarPorTitulo(titulo);
