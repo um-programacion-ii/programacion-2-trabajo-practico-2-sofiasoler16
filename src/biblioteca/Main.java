@@ -8,9 +8,6 @@ public class Main {
 
         Consola consola = new Consola();
 
-        ServicioNotificacionesMail mail = new ServicioNotificacionesMail();
-        ServicioNotificacionesSMS sms = new ServicioNotificacionesSMS();
-
 
         CategoriaRecurso tecnologia = CategoriaRecurso.TECNOLOGIA;
         CategoriaRecurso novela = CategoriaRecurso.NOVELA;
@@ -22,14 +19,14 @@ public class Main {
 
         consola.mostrarMenu();
 
-        Usuario usuario1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "5492615882205");
+        Usuario usuario1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "5492615882205", TipoNotificacion.EMAIL, NivelUrgencia.INFO );
         int opcion = 2;
 
         if (opcion == 2) {
 
             System.out.println("Se eligio la opcion: 2.Crear libro");
 
-            Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, mail, CategoriaRecurso.ROMANCE);
+            Libro libro1 = new Libro("Orgullo y prejuicio", 1, "Salamandra", "Jane Austin", 2025, CategoriaRecurso.ROMANCE);
 
             libro1.prestar(usuario1);
             
@@ -40,10 +37,10 @@ public class Main {
             System.out.println("Opción no implementada todavía.");
         }
 
-        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, mail, CategoriaRecurso.TECNOLOGIA);
-        RecursoDigitalBase revista = new Revista("Ciencia Hoy", 2, 34, sms, CategoriaRecurso.CIENCIA);
-        RecursoDigitalBase audiolibro1 = new AudioLibro("Historias que Inspiran", 3, "2:45", sms, CategoriaRecurso.HISTORIA);
-        RecursoDigitalBase podcast = new Podcast("Charlas Sofi", 4, "Canal Sofía", sms, CategoriaRecurso.INTERES);
+        RecursoDigitalBase libro2 = new Libro("Java en Acción", 1, "Editorial Sofi", "Sofía Soler", 2025, CategoriaRecurso.TECNOLOGIA);
+        RecursoDigitalBase revista = new Revista("Ciencia Hoy", 2, 34, CategoriaRecurso.CIENCIA);
+        RecursoDigitalBase audiolibro1 = new AudioLibro("Historias que Inspiran", 3, "2:45", CategoriaRecurso.HISTORIA);
+        RecursoDigitalBase podcast = new Podcast("Charlas Sofi", 4, "Canal Sofía", CategoriaRecurso.INTERES);
 
         System.out.println("=== Probar comportamiento consistente (LSP) ===");
         libro2.mostrarInformacion();
@@ -66,7 +63,7 @@ public class Main {
 
         gestorBiblioteca.agregarUsuario(usuario1);
 
-        Libro libro3  = new Libro("El Principito", 101, "Editorial Salamandra", "Antoine", 1943, mail, CategoriaRecurso.FICCION);
+        Libro libro3  = new Libro("El Principito", 101, "Editorial Salamandra", "Antoine", 1943, CategoriaRecurso.FICCION);
         gestorBiblioteca.agregarRecurso(libro2);
         gestorBiblioteca.agregarRecurso(libro3);
         gestorBiblioteca.agregarRecurso(revista);
@@ -184,9 +181,14 @@ public class Main {
         ServicioAlertas servicioAlertas = new ServicioAlertas(gestorBiblioteca);
         consola.mostrarAlertas(gestorBiblioteca);
 
+        HistorialAlertas historialAlertas = new HistorialAlertas();
+
+        Recordatorios recordatorios = new Recordatorios(servicioAlertas, historialAlertas);
+        recordatorios.iniciar();
+
         servicioPrestamos.prestar(libro2, usuario1);
 
-        Usuario usuario2 = new Usuario("Juanito", "Martínez", 2, "juani@mail.com", "5492615999999");
+        Usuario usuario2 = new Usuario("Juanito", "Martínez", 2, "juani@mail.com", "5492615999999", TipoNotificacion.SMS, NivelUrgencia.WARNING);
         gestorBiblioteca.agregarUsuario(usuario2);
 
         Reserva reserva2 = new Reserva(usuario2, libro2);
@@ -195,6 +197,15 @@ public class Main {
         servicioReserva.mostrarReservas();
 
         servicioPrestamos.devolver(libro2, usuario1);
+
+        recordatorios.iniciar();
+
+        historialAlertas.mostrarHistorial();
+
+        ((Renovable) libro3).renovar(usuario1);
+        ((Prestable) libro3).devolver(usuario2);
+
+
     }
 
 }
