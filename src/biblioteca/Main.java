@@ -165,12 +165,12 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-//        System.out.println("---Prueba menu reportes---");
-//
-//        ServicioReportes servicioReportes = new ServicioReportes(gestorBiblioteca);
-//
-//        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
-//
+        System.out.println("---Prueba menu reportes---");
+
+        ServicioReportes servicioReportes = new ServicioReportes(gestorBiblioteca);
+
+        consola.mostrarMenuReportes(gestorBiblioteca, servicioReportes);
+
 
         ((Prestable) libro3).prestar(usuario1);
         Prestamo prestamo = new Prestamo(libro3, usuario1);

@@ -36,9 +36,10 @@ public class Consola {
         int opcion;
         do {
             System.out.println("=== Reportes y Estadísticas ===");
-            System.out.println("1. Recursos más prestados");
-            System.out.println("2. Usuarios más activos");
-            System.out.println("3. Estadísticas por categoría");
+            System.out.println("1. Recursos más prestados (inmediato)");
+            System.out.println("2. Usuarios más activos (inmediato)");
+            System.out.println("3. Estadísticas por categoría (inmediato)");
+            System.out.println("4. Generar reporte en segundo plano");
             System.out.println("0. Volver al menú principal");
 
             opcion = pedirOpcion();
@@ -53,12 +54,20 @@ public class Consola {
                 case 3:
                     servicioReportes.reporteEstadisticasPorCategoria();
                     break;
+                case 4:
+                    scanner.nextLine();
+                    System.out.print("¿Qué tipo de reporte desea generar? (usuarios / recursos / categorias): ");
+                    String tipo = scanner.nextLine();
+
+                    servicioReportes.generarReporteEnSegundoPlano(tipo);
+                    break;
                 case 0:
                     System.out.println("Volviendo al menú principal...");
                     break;
                 default:
                     System.out.println("Opción inválida.");
             }
+
             System.out.println();
         } while (opcion != 0);
     }

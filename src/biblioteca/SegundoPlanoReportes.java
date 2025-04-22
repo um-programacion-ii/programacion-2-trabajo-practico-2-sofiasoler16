@@ -13,13 +13,13 @@ public class SegundoPlanoReportes implements Runnable{
     public void run() {
         System.out.println("🔍 Generando reporte: " + tipo + "...");
         try {
-            Thread.sleep(3000); // Simula procesamiento
+            Thread.sleep(2000); // Simula procesamiento
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
         switch (tipo) {
-            case "prestamos":
+            case "recursos":
                 servicioReportes.reporteRecursosMasPrestados(5);
                 break;
             case "usuarios":
