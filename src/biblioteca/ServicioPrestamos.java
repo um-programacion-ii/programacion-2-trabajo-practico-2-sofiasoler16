@@ -70,6 +70,19 @@ public class ServicioPrestamos {
                 }
             } else {
                 System.out.println("🔕 El usuario decidió no tomar el recurso por ahora.");
+
+                List<RecursoDigital> disponibles = gestor.getRecursos().stream()
+                        .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
+                        .toList();
+
+                if (disponibles.isEmpty()) {
+                    System.out.println("📭 No hay recursos disponibles en este momento.");
+                } else {
+                    System.out.println("📚 Recursos disponibles para préstamo:");
+                    for (RecursoDigital r : disponibles) {
+                        System.out.println(r.getIdentificador());
+                    }
+                }
             }
         }
     }
