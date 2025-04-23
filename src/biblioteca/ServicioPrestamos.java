@@ -37,6 +37,17 @@ public class ServicioPrestamos {
 
         } catch (RecursoNoDisponibleException e) {
             System.out.println( e.getMessage());
+
+            System.out.print("¿Desea realizar una reserva de este recurso? (si/no): ");
+            String respuesta = Consola.scanner.nextLine();
+
+            if (respuesta.equalsIgnoreCase("si")) {
+                Reserva reserva = new Reserva(usuario, recurso);
+                servicioReserva.agregarReserva(reserva);
+                System.out.println("✅ Reserva realizada para " + usuario.getNombre());
+            } else {
+                System.out.println("❌ No se realizó la reserva.");
+            }
         }
     }
 
@@ -57,8 +68,8 @@ public class ServicioPrestamos {
             AlertaDisponibilidad alerta = new AlertaDisponibilidad(siguienteReserva);
             alerta.mostrarAlerta();
 
-            Scanner scanner = new Scanner(System.in);
-            String respuesta = scanner.nextLine();
+            Consola.scanner.nextLine();
+            String respuesta = Consola.scanner.nextLine();
 
             if (respuesta.equalsIgnoreCase("si")) {
                 try {
@@ -76,7 +87,7 @@ public class ServicioPrestamos {
         }
 
     private void ofrecerRecursosDisponibles(Usuario usuario) {
-        Scanner scanner = new Scanner(System.in);
+
 
         List<RecursoDigital> disponibles = gestor.getRecursos().stream()
                 .filter(r -> r instanceof Prestable && ((Prestable) r).estaDisponible())
@@ -91,11 +102,11 @@ public class ServicioPrestamos {
             }
 
             System.out.print("¿Desea tomar alguno en préstamo? (si/no): ");
-            String tomarOtro = scanner.nextLine();
+            String tomarOtro = Consola.scanner.nextLine();
 
             if (tomarOtro.equalsIgnoreCase("si")) {
                 System.out.print("Ingrese el TITULO del recurso que desea tomar: ");
-                String idTitulo = scanner.nextLine();
+                String idTitulo = Consola.scanner.nextLine();
 
 
                 List<RecursoDigital> coincidencias = gestor.getRecursos().stream()

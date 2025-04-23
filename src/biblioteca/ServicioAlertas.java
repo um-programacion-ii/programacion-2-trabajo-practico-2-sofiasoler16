@@ -23,6 +23,8 @@ public class ServicioAlertas {
                     alertas.add(new AlertaVencimiento(prestamo, "Hoy vence"));
                 } else if (vencimiento.minusDays(1).equals(fechaActual)) {
                     alertas.add(new AlertaVencimiento(prestamo, "Mañana vence"));
+                } else if (vencimiento.isBefore(fechaActual)) {
+                    alertas.add(new AlertaVencimiento(prestamo, "Vencido"));
                 }
             }
         }
@@ -30,10 +32,25 @@ public class ServicioAlertas {
     }
 
     public List<AlertaVencimiento> obtenerAlertasPorUsuario(Usuario usuario) {
-        return gestor.getPrestamos().stream()
-                .filter(p -> p.getUsuario().getId() == usuario.getId())
-                .map(p -> new AlertaVencimiento(p, "Vencido"))
-                .toList();
+        LocalDate hoy = LocalDate.now();
+        List<AlertaVencimiento> alertas = new ArrayList<>();
+
+        for (Prestamo p : gestor.getPrestamos()) {
+            if (p.getUsuario().getId() == usuario.getId()) {
+                LocalDate vencimiento = p.getFechaDevolucion();
+                if (vencimiento != null) {
+                    if (vencimiento.equals(hoy)) {
+                        alertas.add(new AlertaVencimiento(p, "Hoy vence"));
+                    } else if (vencimiento.minusDays(1).equals(hoy)) {
+                        alertas.add(new AlertaVencimiento(p, "Mañana vence"));
+                    } else if (vencimiento.isBefore(hoy)) {
+                        alertas.add(new AlertaVencimiento(p, "Vencido"));
+                    }
+                }
+            }
+        }
+
+        return alertas;
     }
 
 }
