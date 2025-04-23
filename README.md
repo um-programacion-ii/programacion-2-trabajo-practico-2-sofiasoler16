@@ -1,118 +1,210 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/tc38IXJF)
 # 📚 Trabajo Práctico: Sistema de Gestión de Biblioteca Digital (Java 21+)
 
 ## 📌 Objetivo General
 
 Desarrollar un sistema de gestión de biblioteca digital que implemente los cinco principios SOLID, programación orientada a objetos, y conceptos avanzados de Java. El sistema deberá manejar diferentes tipos de recursos digitales, préstamos, reservas, y notificaciones en tiempo real.
 
-## 👨‍🎓 Información del Alumno
-- **Nombre y Apellido**: [Nombre y Apellido del Alumno]
+### 👩‍🎓 Información del Alumno
+
+**Nombre y Apellido:** Sofía Soler
+
 
 ## 📋 Requisitos Adicionales
 
 ### Documentación del Sistema
 Como parte del trabajo práctico, deberás incluir en este README una guía de uso que explique:
+---
 
-1. **Cómo funciona el sistema**:
-   - Descripción general de la arquitectura
-   - Explicación de los componentes principales
-   - Flujo de trabajo del sistema
+## 🧠 ¿Cómo funciona el sistema?
 
-2. **Cómo ponerlo en funcionamiento**:
-   - Deberás incluir las instrucciones detalladas de puesta en marcha
-   - Explicar los requisitos previos necesarios
-   - Describir el proceso de compilación
-   - Detallar cómo ejecutar la aplicación
+### Descripción general de la arquitectura
 
-3. **Cómo probar cada aspecto desarrollado**:
-   - Deberás proporcionar ejemplos de uso para cada funcionalidad implementada
-   - Incluir casos de prueba que demuestren el funcionamiento del sistema
-   - Describir flujos de trabajo completos que muestren la interacción entre diferentes componentes
+Este sistema simula una **Biblioteca Digital** en consola. Los recursos como libros, revistas, audiolibros y podcasts pueden ser prestados, devueltos, reservados y renovados por usuarios registrados. El flujo de interacción se basa en un menú principal desde el cual el usuario puede navegar por todas las funcionalidades.
 
-La guía debe ser clara, concisa y permitir a cualquier usuario entender y probar el sistema. Se valorará especialmente:
-- La claridad de las instrucciones
-- La completitud de la documentación
-- La organización de la información
-- La inclusión de ejemplos prácticos
+### Componentes principales
 
-### Prueba de Funcionalidades
+- `GestorBiblioteca`: maneja usuarios, recursos y préstamos.
+- `ServicioPrestamos`, `ServicioReserva`, `ServicioAlertas`, `ServicioReportes`: encapsulan funcionalidades específicas.
+- `RecursoDigital` y sus subclases (`Libro`, `Revista`, etc.): representan los distintos tipos de materiales.
+- `Usuario`: representa a un lector con preferencia de notificación.
+- `Consola`: maneja toda la interacción con el usuario desde el menú.
+- `Main`: punto de entrada del sistema.
 
-#### 1. Gestión de Recursos
-- **Agregar Libro**: 
-  - Proceso para agregar un nuevo libro al sistema
-  - Verificación de que el libro se agregó correctamente
-  - Validación de los datos ingresados
+### Flujo de trabajo
 
-- **Buscar Recurso**:
-  - Proceso de búsqueda de recursos
-  - Verificación de resultados de búsqueda
-  - Manejo de casos donde no se encuentran resultados
+1. El usuario elige su perfil al iniciar.
+2. Navega por el menú para realizar acciones (agregar recursos, prestar, devolver, ver alertas, etc.).
+3. Las acciones generan cambios en el sistema, notifican al usuario y desencadenan alertas y reservas si es necesario.
+4. Los reportes y estadísticas se generan automáticamente en segundo plano.
 
-- **Listar Recursos**:
-  - Visualización de todos los recursos
-  - Filtrado por diferentes criterios
-  - Ordenamiento de resultados
+---
 
-#### 2. Gestión de Usuarios
-- **Registrar Usuario**:
-  - Proceso de registro de nuevos usuarios
-  - Validación de datos del usuario
-  - Verificación del registro exitoso
+## ⚙️ ¿Cómo ponerlo en funcionamiento?
 
-- **Buscar Usuario**:
-  - Proceso de búsqueda de usuarios
-  - Visualización de información del usuario
-  - Manejo de usuarios no encontrados
+### Requisitos previos
 
-#### 3. Préstamos
-- **Realizar Préstamo**:
-  - Proceso completo de préstamo
-  - Verificación de disponibilidad
-  - Actualización de estados
+- Java 17 o superior.
+- IDE (por ejemplo: IntelliJ IDEA) o terminal.
+- Proyecto compilado con estructura estándar de paquetes.
 
-- **Devolver Recurso**:
-  - Proceso de devolución
-  - Actualización de estados
-  - Liberación del recurso
+### Compilación
 
-#### 4. Reservas
-- **Realizar Reserva**:
-  - Proceso de reserva de recursos
-  - Gestión de cola de reservas
-  - Notificación de disponibilidad
+Desde la terminal:
+```bash
+git clone https://github.com/sofiasoler16/programacion-2-trabajo-practico-2-sofiasoler16.git
+```
 
-#### 5. Reportes
-- **Ver Reportes**:
-  - Generación de diferentes tipos de reportes
-  - Visualización de estadísticas
-  - Exportación de datos
+Asegurate de estar ubicada en la raíz del proyecto (donde está la carpeta src):
+```bash
+javac src/biblioteca/*.java -d out
+```
 
-#### 6. Alertas
-- **Verificar Alertas**:
-  - Sistema de notificaciones
-  - Diferentes tipos de alertas
-  - Gestión de recordatorios
+### Ejecución
 
-### Ejemplos de Prueba
-1. **Flujo Completo de Préstamo**:
-   - Registrar un usuario
-   - Agregar un libro
-   - Realizar un préstamo
-   - Verificar el estado del recurso
-   - Devolver el recurso
-   - Verificar la actualización del estado
+```bash
+java -cp out biblioteca.Main
+```
 
-2. **Sistema de Reservas**:
-   - Registrar dos usuarios
-   - Agregar un libro
-   - Realizar una reserva con cada usuario
-   - Verificar la cola de reservas
-   - Procesar las reservas
+Al ejecutarse:
+- Mostrará los usuarios disponibles.
+- Luego ingresás al menú principal.
+- Al elegir 0. salir se ejecutan los ejemplos de funcionalidad.
 
-3. **Alertas y Notificaciones**:
-   - Realizar un préstamo
-   - Esperar a que se acerque la fecha de vencimiento
-   - Verificar las alertas generadas
-   - Probar la renovación del préstamo
+---
+
+## 🧪 ¿Cómo probar cada aspecto desarrollado?
+
+Una vez empezado a correr el programa:
+
+### 1. Gestión de Recursos
+
+- **Agregar libro**: Opción 1 → Gestión de Recursos → Agregar Recurso → Libro
+- **Buscar recurso**: Opción 1 → Buscar por título
+- **Listar recursos**: Muestra los recursos agrupados por tipo
+
+### 2. Gestión de Usuarios
+
+- **Registrar usuario**: Opción 2 → Registrar
+- **Buscar usuario**: Por ID (con validación y mensaje si no se encuentra)
+
+### 3. Préstamos
+
+- **Realizar préstamo**: Opción 3 → Realizar préstamo
+- **Devolver recurso**: Opción 3 → Devolver
+- **Visualizar préstamos**: Lista todos los préstamos o por usuario
+
+### 4. Reservas
+
+- Al intentar prestar un recurso **no disponible**, se ofrece hacer una reserva.
+- Al devolver el recurso, si hay reservas, se muestra una **alerta de disponibilidad**.
+
+### 5. Reportes
+
+- Opción 5: permite generar:
+  - Recursos más prestados
+  - Usuarios más activos
+  - Estadísticas por categoría
+- Se ejecutan en **segundo plano**
+
+### 6. Alertas
+
+- Opción 6: muestra alertas por vencimiento.
+- Si la alerta es de un recurso renovable, se ofrece renovarlo.
+- Se respeta el nivel de urgencia configurado por el usuario (`INFO`, `WARNING`, `ERROR`).
+
+---
+
+## ✅ Ejemplos de prueba completos
+
+### Flujo Completo de Préstamo
+
+```java
+    //EJEMPLO Flujo Completo de Prestamo
+        // 1. Registrar un usuario
+        Usuario usuario0 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "2615551234", TipoNotificacion.EMAIL, NivelUrgencia.INFO);
+        gestor.agregarUsuario(usuario0);
+        System.out.println("✅ Usuario registrado: " + usuario0.getNombre());
+
+        // 2. Agregar un libro
+        Libro libro = new Libro("1984", 101, "Minotauro", "George Orwell", 1949, CategoriaRecurso.FICCION);
+        gestor.agregarRecurso(libro);
+        System.out.println("📚 Libro agregado: " + libro.getTitulo());
+
+        // 3. Realizar el préstamo
+        servicioPrestamos.prestar(libro, usuario0);
+
+        // 4. Verificar estado del recurso
+        System.out.println("📌 Estado actual del recurso: " + libro.getEstado());
+
+        // 5. Devolver el recurso
+        servicioPrestamos.devolver(libro, usuario0);
+
+        // 6. Verificar estado del recurso
+        System.out.println("📌 Estado después de la devolución: " + libro.getEstado());
+
+
+```
+
+### Sistema de Reservas
+
+```java
+   //EJEMPLO Sistema de Reservas:
+        // 1. Registrar dos usuarios
+        Usuario usuario1 = new Usuario("Sofi", "Soler", 1, "sofi@mail.com", "261555111", TipoNotificacion.EMAIL, NivelUrgencia.INFO);
+        Usuario usuario2 = new Usuario("Juan", "Martínez", 2, "juan@mail.com", "261555222", TipoNotificacion.SMS, NivelUrgencia.WARNING);
+        gestor.agregarUsuario(usuario1);
+        gestor.agregarUsuario(usuario2);
+
+        // 2. Agregar un libro
+        Libro libro1 = new Libro("Clean Code", 100, "Prentice Hall", "Robert C. Martin", 2008, CategoriaRecurso.TECNOLOGIA);
+        gestor.agregarRecurso(libro1);
+
+        // 3. Usuario1 toma el préstamo exitosamente
+        servicioPrestamos.prestar(libro1, usuario1);
+
+        // 4. Usuario2 intenta prestarlo, pero como no está disponible se le pregunta si desea reservar
+        servicioPrestamos.prestar(libro1, usuario2);
+
+
+        // 5. Ver reservas
+        System.out.println("\n--- Reservas pendientes ---");
+        servicioReserva.mostrarReservas();
+
+        // 6. Usuario1 devuelve el libro
+        System.out.println("\n--- Usuario1 devuelve el libro ---");
+        servicioPrestamos.devolver(libro1, usuario1);  // esto ya procesa reservas y presta al siguiente
+
+        // 7. Verificamos que ya no hay reservas
+        System.out.println("\n--- Reservas luego de la devolución ---");
+        servicioReserva.mostrarReservas();
+
+```
+
+### Alertas y Notificaciones
+
+```java
+  // EJEMPLO: Alertas y Notificaciones:
+        Usuario u1 = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "5492615882205", TipoNotificacion.EMAIL, NivelUrgencia.INFO);
+        Usuario u2 = new Usuario("Juanito", "Martínez", 2, "juani@mail.com", "5492615999999", TipoNotificacion.SMS, NivelUrgencia.WARNING);
+        gestor.agregarUsuario(u1);
+        gestor.agregarUsuario(u2);
+
+        Usuario usuario = new Usuario("Sofía", "Soler", 1, "sofia@mail.com", "5492615882205", TipoNotificacion.EMAIL, NivelUrgencia.INFO);
+        gestor.agregarUsuario(usuario);
+
+        Libro libro2 = new Libro("El Principito", 101, "Salamandra", "Antoine", 1943, CategoriaRecurso.FICCION);
+        gestor.agregarRecurso(libro2);
+
+        servicioPrestamos.prestar(libro2, usuario);
+
+        Prestamo prestamo = new Prestamo(libro2, usuario);
+        prestamo.setFechaDevolucion(LocalDate.now());  // ← Vence hoy
+        gestor.agregarPrestamo(prestamo);
+
+        // Mostrar alertas
+        consola.mostrarAlertas(gestor);
+```
 
 ## 🧩 Tecnologías y Herramientas
 
